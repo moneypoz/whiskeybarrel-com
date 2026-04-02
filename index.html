@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whiskey Barrel — Independent Intelligence on Whiskey Cask Investing</title>
+  <meta name="description" content="Independent intelligence on whiskey cask investing — for the curious and the serious alike." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0D0D0D;
+      --surface:   #161616;
+      --border:    #2A2A2A;
+      --gold:      #C4922A;
+      --gold-h:    #D4A23A;
+      --text:      #D4C9B8;
+      --muted:     #6B6560;
+      --hero-text: #F2EDE4;
+      --max:       1140px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ──────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ── Utilities ──────────────────────────────────────────── */
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 768px) { .wrap { padding: 0 24px; } }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Scroll reveal ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════════════════════ */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(42, 42, 42, 0.6);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      color: var(--hero-text);
+      white-space: nowrap;
+    }
+
+    nav.desktop {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    nav.desktop a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.3s ease;
+    }
+    nav.desktop a:hover { color: var(--gold); }
+
+    .btn-subscribe {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      background: transparent;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      animation: pulse-subscribe 3s ease infinite;
+      white-space: nowrap;
+    }
+    .btn-subscribe:hover {
+      background: var(--gold);
+      color: var(--bg);
+      animation: none;
+    }
+
+    @keyframes pulse-subscribe {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.02); }
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: #0D0D0D;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--hero-text);
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      nav.desktop { display: none; }
+      .btn-subscribe { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(196,146,42,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(196,146,42,0.06) 0%, transparent 50%),
+        linear-gradient(180deg, #0D0D0D 0%, #0F0B08 100%);
+      padding: 120px 24px 80px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(52px, 7vw, 96px);
+      line-height: 1.1;
+      color: var(--hero-text);
+      text-shadow: 0 0 80px rgba(196, 146, 42, 0.15);
+      margin-bottom: 40px;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.8vw, 18px);
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 60px;
+      line-height: 1.7;
+    }
+
+    /* Email form */
+    .email-form {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 16px;
+    }
+
+    .email-form input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text);
+      width: 280px;
+      outline: none;
+      caret-color: var(--gold);
+      transition: border-color 0.3s ease;
+    }
+    .email-form input::placeholder { color: var(--muted); }
+    .email-form input:focus { border-bottom-color: var(--gold); }
+
+    .email-form button {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      padding: 14px 32px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      white-space: nowrap;
+    }
+    .email-form button:hover { background: var(--gold-h); }
+
+    .form-note {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(180deg, var(--border) 0%, transparent 100%);
+      animation: scroll-drop 2s ease infinite;
+    }
+    @keyframes scroll-drop {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      100% { transform: scaleY(1); transform-origin: top; opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .email-form { flex-direction: column; align-items: center; }
+      .email-form input { width: 100%; max-width: 300px; border: 1px solid var(--border); padding: 12px 16px; }
+      .email-form button { width: 100%; max-width: 300px; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION: WHAT THIS IS
+    ════════════════════════════════════════════════════════ */
+    #about {
+      padding: 120px 0;
+      text-align: center;
+    }
+    @media (max-width: 768px) { #about { padding: 60px 0; } }
+
+    .section-eyebrow {
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .section-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(32px, 4vw, 52px);
+      color: var(--hero-text);
+      line-height: 1.2;
+      margin-bottom: 72px;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 56px;
+      text-align: left;
+    }
+
+    .pillar-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 48px;
+      color: rgba(196, 146, 42, 0.3);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--hero-text);
+      margin-bottom: 16px;
+    }
+
+    .pillar-text {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    @media (max-width: 768px) {
+      .pillars { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION: FEATURED ARTICLE
+    ════════════════════════════════════════════════════════ */
+    #featured {
+      padding: 120px 0;
+      border-top: 1px solid rgba(196, 146, 42, 0.2);
+      border-bottom: 1px solid rgba(196, 146, 42, 0.2);
+    }
+    @media (max-width: 768px) { #featured { padding: 60px 0; } }
+
+    .featured-inner {
+      display: grid;
+      grid-template-columns: 60fr 40fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .featured-left .eyebrow { margin-bottom: 28px; display: block; }
+
+    .featured-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(32px, 4vw, 52px);
+      color: var(--hero-text);
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+
+    .featured-excerpt {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    .link-cta {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      transition: opacity 0.3s ease;
+    }
+    .link-cta:hover { opacity: 0.7; }
+
+    .featured-deco {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 200px;
+      line-height: 1;
+      color: rgba(196, 146, 42, 0.06);
+      text-align: right;
+      user-select: none;
+    }
+
+    @media (max-width: 768px) {
+      .featured-inner { grid-template-columns: 1fr; gap: 0; }
+      .featured-deco { display: none; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION: SECONDARY ARTICLES
+    ════════════════════════════════════════════════════════ */
+    #articles {
+      padding: 120px 0;
+    }
+    @media (max-width: 768px) { #articles { padding: 60px 0; } }
+
+    .articles-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .article-card .eyebrow { display: block; margin-bottom: 16px; }
+
+    .article-divider {
+      height: 1px;
+      background: rgba(196, 146, 42, 0.3);
+      margin-bottom: 24px;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 16px;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    .article-card:hover .article-title { color: var(--hero-text); }
+
+    .article-excerpt {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .articles-grid { grid-template-columns: 1fr; gap: 40px; }
+      .articles-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION: EMAIL CAPTURE MID-PAGE
+    ════════════════════════════════════════════════════════ */
+    #newsletter {
+      background: var(--surface);
+      padding: 120px 0;
+      text-align: center;
+      border-top: 1px solid rgba(196, 146, 42, 0.2);
+    }
+    @media (max-width: 768px) { #newsletter { padding: 60px 0; } }
+
+    .newsletter-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter-inner .eyebrow { display: block; margin-bottom: 24px; }
+
+    .newsletter-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 3.5vw, 44px);
+      color: var(--hero-text);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .newsletter-sub {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 44px;
+    }
+
+    .newsletter-note {
+      font-size: 11px;
+      color: rgba(107, 101, 96, 0.6);
+      margin-top: 16px;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION: STATS / CREDIBILITY BAR
+    ════════════════════════════════════════════════════════ */
+    #stats {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 20px 40px;
+    }
+
+    .stat-item + .stat-item {
+      border-left: 1px solid var(--border);
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 42px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-item + .stat-item { border-left: none; border-top: 1px solid var(--border); }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════ */
+    footer {
+      background: #0A0A0A;
+      border-top: 1px solid var(--border);
+      padding: 80px 0 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-tagline {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+    }
+
+    .footer-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+
+    .footer-col-label {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col ul a {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      transition: color 0.4s ease;
+    }
+    .footer-col ul a:hover { color: var(--text); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(107, 101, 96, 0.5);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .social-links a {
+      color: var(--muted);
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+    .social-links a:hover { color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-nav { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 20px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ MOBILE MENU ════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="closeMenu()">Learn</a>
+    <a href="#" onclick="closeMenu()">Invest</a>
+    <a href="#" onclick="closeMenu()">Reviews</a>
+    <a href="#" onclick="closeMenu()">Newsletter</a>
+    <a href="#" onclick="closeMenu()" style="color: var(--gold); font-size: 18px; margin-top: 16px; font-family: 'Inter'; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Subscribe Free</a>
+  </div>
+
+  <!-- ════ HEADER ════ -->
+  <header>
+    <div class="wrap header-inner">
+      <a href="/" class="logo">WHISKEY BARREL</a>
+      <nav class="desktop">
+        <a href="#">Learn</a>
+        <a href="#">Invest</a>
+        <a href="#">Reviews</a>
+        <a href="#">Newsletter</a>
+      </nav>
+      <button class="btn-subscribe" onclick="document.getElementById('newsletter').scrollIntoView({behavior:'smooth'})">Subscribe Free</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ════ HERO ════ -->
+  <section id="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Whiskey Cask Investing</span>
+      <h1 class="hero-headline">
+        The Alternative Asset<br />
+        <em>Nobody Talks About.</em>
+      </h1>
+      <p class="hero-sub">Independent intelligence on whiskey cask investing — for the curious and the serious alike.</p>
+      <div class="email-form">
+        <input type="email" placeholder="Your email address" aria-label="Email address" />
+        <button type="button">Subscribe Free →</button>
+      </div>
+      <p class="form-note">Join independent-minded investors. No spam, ever.</p>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ════ WHAT THIS IS ════ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow section-eyebrow">About This Site</span>
+        <h2 class="section-headline">Where Whiskey Meets Wealth</h2>
+      </div>
+      <div class="pillars reveal">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <div class="pillar-title">Invest Intelligently</div>
+          <p class="pillar-text">Whiskey casks are one of the few alternative assets that actively improve with time. We break down how they're valued, bought, and sold — without broker bias.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <div class="pillar-title">Learn Deeply</div>
+          <p class="pillar-text">From the chemistry of barrel aging to the geography of Scotch whisky regions — the knowledge base that makes you a more informed investor and a more interesting drinker.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <div class="pillar-title">Trust the Source</div>
+          <p class="pillar-text">No broker relationships. No paid placements. Revenue comes from newsletter sponsorships and affiliate partnerships — always disclosed. You deserve to know who's talking to you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ FEATURED ARTICLE ════ -->
+  <section id="featured">
+    <div class="wrap">
+      <div class="featured-inner reveal">
+        <div class="featured-left">
+          <span class="eyebrow">Invest</span>
+          <h2 class="featured-headline">Why Whiskey Casks Are the Alternative Investment Nobody Talks About</h2>
+          <p class="featured-excerpt">Scotch whisky casks have quietly outperformed many traditional asset classes over the past decade. The people who know about it aren't talking. Here's what you need to know.</p>
+          <a href="#" class="link-cta">Read the Full Report →</a>
+        </div>
+        <div class="featured-deco" aria-hidden="true">01</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECONDARY ARTICLES ════ -->
+  <section id="articles">
+    <div class="wrap">
+      <div class="articles-header reveal">
+        <span class="eyebrow">Latest Intelligence</span>
+        <a href="#" class="link-cta">All Articles →</a>
+      </div>
+      <div class="articles-grid">
+
+        <article class="article-card reveal">
+          <span class="eyebrow">Learn</span>
+          <div class="article-divider"></div>
+          <h3 class="article-title">What Actually Happens Inside a Whiskey Barrel for 12 Years</h3>
+          <p class="article-excerpt">The barrel isn't a container. It's the most important ingredient in whiskey. The science is more fascinating than you'd expect.</p>
+          <a href="#" class="link-cta">Read →</a>
+        </article>
+
+        <article class="article-card reveal">
+          <span class="eyebrow">Invest</span>
+          <div class="article-divider"></div>
+          <h3 class="article-title">Scotch vs Bourbon Casks — Which Is the Better Investment?</h3>
+          <p class="article-excerpt">Two very different markets, two very different risk profiles. A clear-eyed look at what the data actually shows.</p>
+          <a href="#" class="link-cta">Read →</a>
+        </article>
+
+        <article class="article-card reveal">
+          <span class="eyebrow">Review</span>
+          <div class="article-divider"></div>
+          <h3 class="article-title">The Best Bourbons Under $50 in 2026, Ranked Without the Hype</h3>
+          <p class="article-excerpt">We cut through the marketing noise. These are the bottles that actually over-deliver at their price point.</p>
+          <a href="#" class="link-cta">Read →</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ EMAIL CAPTURE MID-PAGE ════ -->
+  <section id="newsletter">
+    <div class="wrap">
+      <div class="newsletter-inner reveal">
+        <span class="eyebrow">The Barrel Brief</span>
+        <h2 class="newsletter-headline">Weekly intelligence on<br />whiskey cask investing.</h2>
+        <p class="newsletter-sub">Every week: market insights, cask valuations, new release analysis, and the information serious investors actually need. Free, forever.</p>
+        <div class="email-form">
+          <input type="email" placeholder="Your email address" aria-label="Email address" />
+          <button type="button">Subscribe Free →</button>
+        </div>
+        <p class="newsletter-note">Read by investors, enthusiasts, and professionals in 40+ countries.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ STATS / CREDIBILITY ════ -->
+  <section id="stats">
+    <div class="wrap">
+      <div class="stats-row reveal">
+        <div class="stat-item">
+          <span class="stat-number">500%+</span>
+          <p class="stat-label">Average appreciation of a premium<br />Scotch cask over 20 years</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">$72B</span>
+          <p class="stat-label">Global whiskey market value in 2024</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">200,000+</span>
+          <p class="stat-label">Whiskey casks currently maturing<br />in Scotland alone</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <a href="/" class="logo">WHISKEY BARREL</a>
+        <span class="footer-tagline">Independent intelligence. No broker bias.</span>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Explore</span>
+          <ul>
+            <li><a href="#">Learn</a></li>
+            <li><a href="#">Invest</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="#">Newsletter</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Invest</span>
+          <ul>
+            <li><a href="#">Cask Investing 101</a></li>
+            <li><a href="#">Is Whiskey a Good Investment</a></li>
+            <li><a href="#">How to Buy a Cask</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Company</span>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Advertise</a></li>
+            <li><a href="#">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 WhiskeyBarrel.com</span>
+        <div class="social-links">
+          <!-- YouTube -->
+          <a href="#" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <!-- X -->
+          <a href="#" aria-label="X (Twitter)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Hamburger / mobile menu ──────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── Scroll reveal ────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
