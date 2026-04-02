@@ -711,10 +711,10 @@
         <em>Nobody Talks About.</em>
       </h1>
       <p class="hero-sub">Independent intelligence on whiskey cask investing — for the curious and the serious alike.</p>
-      <form class="email-form" action="https://whiskeybarrelbrief.beehiiv.com/subscribe" method="post" target="_self">
-        <input type="email" name="email" placeholder="Your email address" required />
-        <button type="submit">Subscribe Free →</button>
-      </form>
+      <div class="email-form">
+        <input type="email" id="hero-email" placeholder="Your email address" />
+        <button type="button" onclick="handleSubscribe('hero-email', this)">Subscribe Free →</button>
+      </div>
       <p class="form-note">Join independent-minded investors. No spam, ever.</p>
     </div>
     <div class="scroll-indicator" aria-hidden="true">
@@ -808,10 +808,10 @@
         <span class="eyebrow">The Barrel Brief</span>
         <h2 class="newsletter-headline">Weekly intelligence on<br />whiskey cask investing.</h2>
         <p class="newsletter-sub">Every week: market insights, cask valuations, new release analysis, and the information serious investors actually need. Free, forever.</p>
-        <form class="email-form" action="https://whiskeybarrelbrief.beehiiv.com/subscribe" method="post" target="_self">
-          <input type="email" name="email" placeholder="Your email address" required />
-          <button type="submit">Subscribe Free →</button>
-        </form>
+        <div class="email-form">
+          <input type="email" id="newsletter-email" placeholder="Your email address" />
+          <button type="button" onclick="handleSubscribe('newsletter-email', this)">Subscribe Free →</button>
+        </div>
         <p class="newsletter-note">Read by investors, enthusiasts, and professionals in 40+ countries.</p>
       </div>
     </div>
@@ -921,34 +921,28 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ── Email form submission ────────────────────────────────
-    document.querySelectorAll('.email-form').forEach(function(form) {
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const input = form.querySelector('input[type="email"]');
-        const btn   = form.querySelector('button');
-        const email = input.value.trim();
-        if (!email) return;
+    // ── Email subscribe ──────────────────────────────────────
+    function handleSubscribe(inputId, btn) {
+      var input = document.getElementById(inputId);
+      var email = input.value.trim();
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        btn.textContent = 'Subscribing…';
-        btn.disabled = true;
-        input.disabled = true;
+      if (!email || !emailRegex.test(email)) {
+        input.style.borderBottomColor = '#C4922A';
+        input.focus();
+        return;
+      }
 
-        const body = new URLSearchParams();
-        body.append('email', email);
+      // window.open from a direct click handler is never blocked by browsers
+      window.open(
+        'https://whiskeybarrelbrief.beehiiv.com/subscribe?email=' + encodeURIComponent(email),
+        '_blank'
+      );
 
-        fetch('https://whiskeybarrelbrief.beehiiv.com/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: body.toString(),
-          mode: 'no-cors'
-        }).then(function() {
-          form.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:20px;color:var(--gold);letter-spacing:0.03em;">You\'re in. Welcome.</p>';
-        }).catch(function() {
-          form.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:20px;color:var(--gold);letter-spacing:0.03em;">You\'re in. Welcome.</p>';
-        });
-      });
-    });
+      // Show success inline
+      var wrapper = btn.closest('.email-form') || btn.parentElement;
+      wrapper.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:20px;color:#C4922A;letter-spacing:0.03em;">You\'re in. Welcome.</p>';
+    }
   </script>
 </body>
 </html>
