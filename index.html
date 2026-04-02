@@ -711,10 +711,10 @@
         <em>Nobody Talks About.</em>
       </h1>
       <p class="hero-sub">Independent intelligence on whiskey cask investing — for the curious and the serious alike.</p>
-      <div class="email-form">
-        <input type="email" id="hero-email" placeholder="Your email address" />
-        <button type="button" onclick="handleSubscribe('hero-email', this)">Subscribe Free →</button>
-      </div>
+      <form class="email-form" onsubmit="handleSubscribe(event, this)">
+        <input type="email" placeholder="Your email address" required />
+        <button type="submit">SUBSCRIBE FREE →</button>
+      </form>
       <p class="form-note">Join independent-minded investors. No spam, ever.</p>
     </div>
     <div class="scroll-indicator" aria-hidden="true">
@@ -808,10 +808,10 @@
         <span class="eyebrow">The Barrel Brief</span>
         <h2 class="newsletter-headline">Weekly intelligence on<br />whiskey cask investing.</h2>
         <p class="newsletter-sub">Every week: market insights, cask valuations, new release analysis, and the information serious investors actually need. Free, forever.</p>
-        <div class="email-form">
-          <input type="email" id="newsletter-email" placeholder="Your email address" />
-          <button type="button" onclick="handleSubscribe('newsletter-email', this)">Subscribe Free →</button>
-        </div>
+        <form class="email-form" onsubmit="handleSubscribe(event, this)">
+          <input type="email" placeholder="Your email address" required />
+          <button type="submit">SUBSCRIBE FREE →</button>
+        </form>
         <p class="newsletter-note">Read by investors, enthusiasts, and professionals in 40+ countries.</p>
       </div>
     </div>
@@ -922,26 +922,10 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // ── Email subscribe ──────────────────────────────────────
-    function handleSubscribe(inputId, btn) {
-      var input = document.getElementById(inputId);
-      var email = input.value.trim();
-      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      if (!email || !emailRegex.test(email)) {
-        input.style.borderBottomColor = '#C4922A';
-        input.focus();
-        return;
-      }
-
-      // window.open from a direct click handler is never blocked by browsers
-      window.open(
-        'https://whiskeybarrelbrief.beehiiv.com/subscribe?email=' + encodeURIComponent(email),
-        '_blank'
-      );
-
-      // Show success inline
-      var wrapper = btn.closest('.email-form') || btn.parentElement;
-      wrapper.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:20px;color:#C4922A;letter-spacing:0.03em;">You\'re in. Welcome.</p>';
+    function handleSubscribe(e, form) {
+      e.preventDefault();
+      var email = form.querySelector('input[type="email"]').value;
+      window.location.href = 'https://whiskeybarrelbrief.beehiiv.com/subscribe?email=' + encodeURIComponent(email);
     }
   </script>
 </body>
