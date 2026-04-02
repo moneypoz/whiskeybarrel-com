@@ -711,7 +711,7 @@
         <em>Nobody Talks About.</em>
       </h1>
       <p class="hero-sub">Independent intelligence on whiskey cask investing — for the curious and the serious alike.</p>
-      <form class="email-form" action="https://whiskeybarrelbrief.beehiiv.com/subscribe" method="post" target="_blank">
+      <form class="email-form" action="https://whiskeybarrelbrief.beehiiv.com/subscribe" method="post" target="_self">
         <input type="email" name="email" placeholder="Your email address" required />
         <button type="submit">Subscribe Free →</button>
       </form>
@@ -808,7 +808,7 @@
         <span class="eyebrow">The Barrel Brief</span>
         <h2 class="newsletter-headline">Weekly intelligence on<br />whiskey cask investing.</h2>
         <p class="newsletter-sub">Every week: market insights, cask valuations, new release analysis, and the information serious investors actually need. Free, forever.</p>
-        <form class="email-form" action="https://whiskeybarrelbrief.beehiiv.com/subscribe" method="post" target="_blank">
+        <form class="email-form" action="https://whiskeybarrelbrief.beehiiv.com/subscribe" method="post" target="_self">
           <input type="email" name="email" placeholder="Your email address" required />
           <button type="submit">Subscribe Free →</button>
         </form>
@@ -920,6 +920,35 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Email form submission ────────────────────────────────
+    document.querySelectorAll('.email-form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const input = form.querySelector('input[type="email"]');
+        const btn   = form.querySelector('button');
+        const email = input.value.trim();
+        if (!email) return;
+
+        btn.textContent = 'Subscribing…';
+        btn.disabled = true;
+        input.disabled = true;
+
+        const body = new URLSearchParams();
+        body.append('email', email);
+
+        fetch('https://whiskeybarrelbrief.beehiiv.com/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString(),
+          mode: 'no-cors'
+        }).then(function() {
+          form.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:20px;color:var(--gold);letter-spacing:0.03em;">You\'re in. Welcome.</p>';
+        }).catch(function() {
+          form.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:20px;color:var(--gold);letter-spacing:0.03em;">You\'re in. Welcome.</p>';
+        });
+      });
+    });
   </script>
 </body>
 </html>
