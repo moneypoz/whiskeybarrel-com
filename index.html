@@ -922,32 +922,11 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // ── Email subscribe ──────────────────────────────────────
-    async function handleSubscribe(e, form) {
+    function handleSubscribe(e, form) {
       e.preventDefault();
       const email = form.querySelector('input[type="email"]').value;
-      const button = form.querySelector('button');
-      const input = form.querySelector('input');
-
-      button.textContent = 'Subscribing...';
-      button.disabled = true;
-
-      try {
-        await fetch('https://whiskeybarrelbrief.beehiiv.com/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-          mode: 'no-cors'
-        });
-      } catch(err) {}
-
-      input.value = '';
-      button.textContent = 'You\'re in. Welcome.';
-      button.style.background = '#2A6A2A';
-      setTimeout(() => {
-        button.textContent = 'SUBSCRIBE FREE →';
-        button.style.background = '#C4922A';
-        button.disabled = false;
-      }, 4000);
+      const url = 'https://magic.beehiiv.com/v1/ba8c62a9-a5af-4530-ad1e-9010aa2831d1?email=' + encodeURIComponent(email);
+      window.open(url, '_blank');
     }
   </script>
 </body>
