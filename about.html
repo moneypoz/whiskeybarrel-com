@@ -12,15 +12,15 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Why Whiskey Casks Are the Alternative Investment Nobody Talks About | WhiskeyBarrel.com</title>
-  <meta name="description" content="Most investors have never considered owning a whiskey cask. The ones who have are quietly building wealth in one of the most misunderstood alternative asset markets in the world." />
-  <link rel="canonical" href="https://whiskeybarrel.com/invest/why-whiskey-casks-are-the-alternative-investment-nobody-talks-about" />
+  <title>About WhiskeyBarrel.com — Independent Intelligence on Whiskey Cask Investing</title>
+  <meta name="description" content="WhiskeyBarrel.com is an independent editorial resource covering whiskey culture and cask investing. No broker relationships. No paid placements. Just honest intelligence." />
+  <link rel="canonical" href="https://whiskeybarrel.com/about" />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Why Whiskey Casks Are the Alternative Investment Nobody Talks About" />
-  <meta property="og:description" content="Most investors have never considered owning a whiskey cask. The ones who have are quietly building wealth in one of the most misunderstood alternative asset markets in the world." />
-  <meta property="og:url" content="https://whiskeybarrel.com/invest/why-whiskey-casks-are-the-alternative-investment-nobody-talks-about" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About WhiskeyBarrel.com" />
+  <meta property="og:description" content="Independent intelligence on whiskey cask investing. No broker relationships. No paid placements. Just honest analysis." />
+  <meta property="og:url" content="https://whiskeybarrel.com/about" />
   <meta property="og:site_name" content="WhiskeyBarrel.com" />
   <meta property="og:image" content="https://whiskeybarrel.com/images/whiskey-barrels-aging-warehouse.png" />
   <meta property="og:image:width" content="1200" />
@@ -218,19 +218,19 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       ARTICLE HEADER
+       PAGE HEADER
     ════════════════════════════════════════════════════════ */
-    .article-header {
+    .page-header {
       padding: 140px 0 64px;
       text-align: center;
     }
 
-    .article-header .eyebrow {
+    .page-header .eyebrow {
       display: block;
       margin-bottom: 24px;
     }
 
-    .article-headline {
+    .page-headline {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-size: clamp(36px, 5vw, 64px);
@@ -241,24 +241,16 @@
       text-shadow: 0 0 80px rgba(196, 146, 42, 0.1);
     }
 
-    .article-subhead {
+    .page-subhead {
       font-size: clamp(16px, 1.8vw, 19px);
       font-weight: 300;
       color: var(--muted);
       max-width: 620px;
-      margin: 0 auto 28px;
+      margin: 0 auto 56px;
       line-height: 1.7;
     }
 
-    .article-meta {
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      margin-bottom: 56px;
-    }
-
-    .article-divider {
+    .page-divider {
       height: 1px;
       background: rgba(196, 146, 42, 0.2);
       max-width: 740px;
@@ -266,19 +258,20 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       ARTICLE BODY
+       PAGE BODY
     ════════════════════════════════════════════════════════ */
-    .article-body {
+    .page-body {
       max-width: 740px;
       margin: 0 auto;
-      padding: 64px 40px 100px;
+      padding: 64px 40px 80px;
     }
 
     @media (max-width: 768px) {
-      .article-body { padding: 48px 24px 72px; }
+      .page-header { padding: 120px 24px 48px; }
+      .page-body { padding: 48px 24px 64px; }
     }
 
-    .article-body p {
+    .page-body p {
       font-size: 17px;
       font-weight: 300;
       line-height: 1.9;
@@ -286,9 +279,9 @@
       margin-bottom: 28px;
     }
 
-    .article-body p:last-child { margin-bottom: 0; }
+    .page-body p:last-child { margin-bottom: 0; }
 
-    .article-body h2 {
+    .page-body h2 {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
       font-size: 26px;
@@ -299,50 +292,66 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       ARTICLE FOOTER
+       VALUES SECTION
     ════════════════════════════════════════════════════════ */
-    .article-footer-divider {
-      height: 1px;
-      background: rgba(196, 146, 42, 0.2);
+    .values-section {
       max-width: 740px;
       margin: 0 auto;
+      padding: 0 40px 100px;
     }
 
-    .article-about {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 40px 40px 0;
+    @media (max-width: 768px) {
+      .values-section { padding: 0 24px 72px; }
     }
 
-    @media (max-width: 768px) { .article-about { padding: 32px 24px 0; } }
+    .values-label {
+      display: block;
+      margin-bottom: 48px;
+    }
 
-    .article-about p {
-      font-size: 14px;
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    @media (max-width: 768px) {
+      .values-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    .value-col-label {
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .value-col p {
+      font-size: 15px;
       font-weight: 300;
       color: #9A9088;
       line-height: 1.7;
     }
 
-    /* ── Email capture box ──────────────────────────────────── */
-    .article-email-section {
+    /* ════════════════════════════════════════════════════════
+       EMAIL CAPTURE
+    ════════════════════════════════════════════════════════ */
+    .page-email-section {
       background: var(--surface);
       border-top: 1px solid rgba(196, 146, 42, 0.2);
-      margin-top: 64px;
       padding: 72px 24px;
       text-align: center;
     }
 
-    .article-email-inner {
+    .page-email-inner {
       max-width: 520px;
       margin: 0 auto;
     }
 
-    .article-email-inner .eyebrow {
+    .page-email-inner .eyebrow {
       display: block;
       margin-bottom: 20px;
     }
 
-    .article-email-headline {
+    .page-email-headline {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-size: clamp(26px, 3vw, 38px);
@@ -351,7 +360,7 @@
       margin-bottom: 16px;
     }
 
-    .article-email-sub {
+    .page-email-sub {
       font-size: 15px;
       font-weight: 300;
       color: var(--muted);
@@ -474,7 +483,6 @@
     .social-links a:hover { color: var(--gold); }
 
     @media (max-width: 768px) {
-      .article-header { padding: 120px 24px 48px; }
       .footer-top { flex-direction: column; align-items: flex-start; gap: 16px; }
       .footer-nav { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 20px; align-items: flex-start; }
@@ -502,102 +510,85 @@
         <a href="#">Reviews</a>
         <a href="#">Newsletter</a>
       </nav>
-      <button class="btn-subscribe" onclick="document.getElementById('article-newsletter').scrollIntoView({behavior:'smooth'})">Subscribe Free</button>
+      <button class="btn-subscribe" onclick="document.getElementById('page-newsletter').scrollIntoView({behavior:'smooth'})">Subscribe Free</button>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <!-- ════ ARTICLE HEADER ════ -->
-  <div class="article-header">
+  <!-- ════ PAGE HEADER ════ -->
+  <div class="page-header">
     <div class="wrap">
-      <span class="eyebrow">Invest</span>
-      <h1 class="article-headline">Why Whiskey Casks Are the Alternative Investment Nobody Talks About</h1>
-      <p class="article-subhead">While the rest of the world argues about stocks, a quiet group of investors is aging their money in Scottish warehouses. Here's what they know that you don't.</p>
-      <p class="article-meta">8 min read &middot; WhiskeyBarrel.com</p>
+      <span class="eyebrow">About</span>
+      <h1 class="page-headline">Built for the Investor Nobody Was Talking To</h1>
+      <p class="page-subhead">WhiskeyBarrel.com exists because the best information about whiskey cask investing was scattered, biased, or buried behind broker sales pitches. We decided to fix that.</p>
     </div>
-    <div class="article-divider"></div>
+    <div class="page-divider"></div>
   </div>
 
-  <!-- ════ ARTICLE BODY ════ -->
-  <div class="article-body reveal">
+  <!-- ════ PAGE BODY ════ -->
+  <div class="page-body reveal">
 
-    <p>Somewhere in the Scottish Highlands, in a dark warehouse that smells like heaven, your money could be getting better with age.</p>
-    <p>Not a stock. Not a bond. Not a crypto token with a dog on it.</p>
-    <p>A barrel of whiskey.</p>
-    <p>Before you scroll away, hear me out. Because what I am about to tell you is the kind of thing that sounds crazy until you look at the numbers. And then it sounds like the most obvious thing in the world.</p>
+    <h2>Why This Site Exists</h2>
+    <p>The whiskey cask investment market is real, it is growing, and it has quietly made serious money for the people who understood it early. It has also burned investors who trusted the wrong sources, paid inflated prices, and had no independent place to turn for honest information.</p>
+    <p>That is the problem WhiskeyBarrel.com was built to solve.</p>
+    <p>We are not a broker. We do not sell casks. We do not earn commissions on transactions. We have no financial relationship with any distillery, warehouse, or investment platform that would compromise what we tell you.</p>
+    <p>What we are is an independent editorial resource. We research, we write, and we publish. Our job is to give you the clearest, most honest picture of the whiskey cask market that exists anywhere on the internet.</p>
 
-    <h2>The Weird Thing About Whiskey</h2>
-    <p>Here is something most people do not know: whiskey does not exist until it is aged in a barrel. What comes off the still is clear, harsh, and frankly not something you would want in your glass. The barrel is where the magic happens.</p>
-    <p>Over years, sometimes decades, the spirit breathes through the oak. It picks up color, complexity, and the flavors that make a great Scotch worth savoring. While that is happening, about 2% of the liquid evaporates every year through the wood. The Scots call this the angel's share.</p>
-    <p>So every year that passes, the whiskey in a cask gets better and there is less of it. Think about that from an investor's perspective for a second.</p>
-    <p>You own something that gets rarer and more valuable automatically, just by sitting there.</p>
+    <h2>What We Cover</h2>
+    <p>WhiskeyBarrel.com covers three things and three things only.</p>
+    <p>The investment case for whiskey casks. How the market works, what drives appreciation, what the risks are, and how to evaluate brokers and distilleries without getting taken advantage of.</p>
+    <p>The culture and craft behind whiskey. You cannot understand the investment without understanding the product. We cover barrel aging, distillery regions, production methods, and the factors that separate genuinely great whiskey from marketing dressed up as craftsmanship.</p>
+    <p>Independent reviews and recommendations. Honest assessments of whiskies, brokers, and resources, based on research and analysis rather than paid placements or affiliate pressure.</p>
 
-    <h2>The Part Where the Numbers Get Interesting</h2>
-    <p>The Knight Frank Luxury Investment Index has tracked rare whisky for years. Premium Scotch casks have appreciated significantly over twenty-year periods, outpacing plenty of traditional investments in the process.</p>
-    <p>A cask of Macallan from the 1980s that sold for a few thousand pounds? Worth hundreds of thousands today.</p>
-    <p>And here is the thing that should make any investor sit up straight: there are no whiskey cask ETFs. No Bloomberg terminal tracking barrel prices by the minute. No CNBC panel screaming about whether to buy or sell Speyside. The people who understand this market have largely kept it to themselves, which means the information gap between insiders and everyone else is enormous.</p>
-    <p>Information gaps are where returns live.</p>
+    <h2>How We Make Money</h2>
+    <p>This is the part most sites bury in fine print. We put it here because you deserve to know.</p>
+    <p>WhiskeyBarrel.com earns revenue through two sources. Newsletter sponsorships, where brands pay to reach our audience, and affiliate partnerships, where we earn a commission if you purchase a product through one of our links. Both are always disclosed clearly in the content where they appear.</p>
+    <p>We do not accept payment for editorial coverage. A brand cannot pay to be reviewed favorably or featured in our content. The editorial side of this site is completely independent of the commercial side, and we intend to keep it that way.</p>
 
-    <h2>So How Does It Actually Work?</h2>
-    <p>You find a reputable broker or go directly to a distillery. You purchase a physical barrel. Your name goes on it, it gets stored in a government-supervised bonded warehouse, and it is insured. You own it outright. Not a share of it. Not a paper claim on it. The actual barrel.</p>
-    <p>Then you wait. You pay storage costs of roughly $200 to $500 a year. And when you are ready to sell, whether that is five years or twenty years later, you sell it to a bottler, a collector, or another investor at whatever the market will bear.</p>
-    <p>No fund managers taking a cut. No quarterly earnings calls. No panic-selling because some Fed official said something weird at a press conference.</p>
-    <p>Just time doing its thing.</p>
+    <h2>The Barrel Brief</h2>
+    <p>Our free weekly newsletter goes out every week to investors, enthusiasts, and professionals who want to stay ahead of the whiskey cask market. New releases, investment analysis, broker intelligence, and the information that serious people actually need.</p>
+    <p>It is free. It will stay free. Subscribe below.</p>
 
-    <h2>What Does It Cost?</h2>
-    <p>This is where people are usually surprised.</p>
-    <p>You do not need to be wealthy to do this. A young cask from a solid distillery can start around $5,000 to $15,000. A ten-year-old cask from a well-regarded producer might run $20,000 to $50,000. Trophy distilleries like Macallan or Springbank at significant age can cost $100,000 or more, but those are not where most people start.</p>
-    <p>Most people start with one barrel. They learn the market. They build relationships. They see how it works.</p>
-    <p>Then they buy another one.</p>
-
-    <h2>Okay, What's the Catch?</h2>
-    <p>There is always a catch. Here are the real ones.</p>
-    <p>You cannot sell a whiskey cask like you sell a stock. If you need the money in three months, this is the wrong vehicle entirely. Finding the right buyer takes time, sometimes weeks, sometimes months. This is patient capital, full stop.</p>
-    <p>The market is largely unregulated, which is a genuinely important thing to understand. There is no central exchange. There is no standardized pricing. And there are operators in this industry who will happily overcharge you, misrepresent what a cask is worth, or sell you something at a price that no serious buyer would ever pay.</p>
-    <p>This is not a reason to avoid the asset class. It is a reason to do your homework before handing anyone money. Verify casks are registered with the Scotch Whisky Association. Get independent valuations. Talk to the warehouse directly. Anyone who resists this level of scrutiny is telling you something important about why they are resisting it.</p>
-
-    <h2>Why Is This Moment Different?</h2>
-    <p>Global demand for premium aged Scotch has grown for thirty consecutive years. Asia alone has transformed the top end of the whisky market. What wealthy consumers in China, Japan, and South Korea are willing to pay for exceptional aged Scotch has reset price expectations across the entire category.</p>
-    <p>At the same time, supply is structurally constrained in a way that simply cannot be fixed quickly. Great aged whiskey takes time. You cannot open a distillery today and solve a shortage of twenty-year-old single malt by next quarter. The whiskey that will satisfy demand in 2040 is sitting in barrels right now, or it does not exist yet.</p>
-    <p>That gap between growing demand and constrained supply is not going away. If anything it is widening.</p>
-
-    <h2>Who Is Already Doing This?</h2>
-    <p>Until recently, whiskey cask investing was mostly the domain of wealthy collectors who stumbled into the financial upside of a hobby, and family offices looking for assets that do not move in lockstep with stock markets.</p>
-    <p>That is changing. A new kind of investor is showing up. Professionals, entrepreneurs, people who have read enough financial history to be skeptical of the idea that the only real investments are publicly traded securities. They are allocating small portions of their portfolios to physical assets that have genuine track records and that they actually understand.</p>
-    <p>A whiskey cask does not care what the Fed does this week. It does not gap down because of an earnings miss. It does not get caught up in a short squeeze. It just sits in a warehouse in Scotland, getting older and better and more valuable, on its own schedule.</p>
-    <p>There is something deeply satisfying about that.</p>
-
-    <h2>One Last Thing</h2>
-    <p>I want to be honest with you about what this is and what it is not.</p>
-    <p>It is not a get-rich-quick vehicle. The returns that make this asset class interesting are the product of years of patient holding. Anyone who suggests otherwise is selling something.</p>
-    <p>It is not risk-free. The market is small, the regulatory framework is thin, and the quality of market participants varies enormously. You can lose money here, particularly if you overpay, choose the wrong broker, or select casks that do not appreciate as expected.</p>
-    <p>It is also not inaccessible or impossibly complex. The fundamentals are understandable. The due diligence process, while demanding, is manageable for anyone who has navigated private market investments before. The ongoing management requirements are minimal once the initial purchase is complete.</p>
-    <p>What it is, for the right person with the right time horizon, is one of the most interesting investment opportunities most people have never seriously considered.</p>
-    <p>The barrel is aging. The question is whether you are going to be on the right side of that when it matters.</p>
+    <h2>A Note on Independence</h2>
+    <p>The whiskey cask market has a trust problem. In 2025, several large operators collapsed, leaving investors with paperwork but no barrels. Marketing dressed up as analysis convinced people to pay prices the market would never support. Brokers presented projected returns as though they were guarantees.</p>
+    <p>WhiskeyBarrel.com was built in direct response to that environment. We believe the market needs an independent voice that has no stake in what you buy, where you buy it, or whether you buy at all.</p>
+    <p>That independence is not just a policy. It is the entire point.</p>
 
   </div>
 
-  <!-- ════ ARTICLE FOOTER ════ -->
-  <div class="article-footer-divider"></div>
-
-  <div class="article-about">
-    <p>WhiskeyBarrel.com is an independent editorial resource covering whiskey culture and cask investing. We are not brokers. We do not sell casks. We earn revenue through newsletter sponsorships and affiliate partnerships, always disclosed.</p>
+  <!-- ════ VALUES SECTION ════ -->
+  <div class="values-section reveal">
+    <span class="eyebrow values-label">What We Stand For</span>
+    <div class="values-grid">
+      <div class="value-col">
+        <span class="eyebrow value-col-label">Independent</span>
+        <p>No broker relationships. No distillery partnerships that influence coverage. No paid placements in editorial content. Ever.</p>
+      </div>
+      <div class="value-col">
+        <span class="eyebrow value-col-label">Honest</span>
+        <p>We tell you what the data shows, including the risks, the failures, and the parts of this market that deserve serious scrutiny.</p>
+      </div>
+      <div class="value-col">
+        <span class="eyebrow value-col-label">Useful</span>
+        <p>Every piece of content on this site exists to help you make better decisions. Not to impress you, not to sell you, just to be genuinely useful.</p>
+      </div>
+    </div>
   </div>
 
-  <!-- ── Email capture ──────────────────────────────────────── -->
-  <div class="article-email-section" id="article-newsletter">
-    <div class="article-email-inner reveal">
+  <!-- ════ EMAIL CAPTURE ════ -->
+  <section id="page-newsletter" class="page-email-section">
+    <div class="page-email-inner reveal">
       <span class="eyebrow">The Barrel Brief</span>
-      <h2 class="article-email-headline">Get the intelligence. Stay ahead.</h2>
-      <p class="article-email-sub">Weekly whiskey cask investing insights, free forever.</p>
+      <h2 class="page-email-headline">Independent intelligence, delivered every week.</h2>
+      <p class="page-email-sub">Free forever. No spam. No broker bias.</p>
       <form class="email-form" onsubmit="handleSubscribe(event, this)">
         <input type="email" placeholder="Your email address" required />
-        <button type="submit">Subscribe Free →</button>
+        <button type="submit">SUBSCRIBE FREE →</button>
       </form>
     </div>
-  </div>
+  </section>
 
   <!-- ════ FOOTER ════ -->
   <footer>
@@ -637,12 +628,15 @@
       <div class="footer-bottom">
         <span class="footer-copy">© 2026 WhiskeyBarrel.com</span>
         <div class="social-links">
+          <!-- YouTube -->
           <a href="#" aria-label="YouTube">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           </a>
+          <!-- Instagram -->
           <a href="#" aria-label="Instagram">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
           </a>
+          <!-- X -->
           <a href="#" aria-label="X (Twitter)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
@@ -676,7 +670,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
