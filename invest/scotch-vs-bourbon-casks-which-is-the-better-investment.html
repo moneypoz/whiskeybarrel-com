@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SS0SZWSV6J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SS0SZWSV6J');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scotch vs Bourbon Casks: Which Is the Better Investment? | WhiskeyBarrel.com</title>
+  <meta name="description" content="Both Scotch and bourbon casks have passionate advocates. But when you look at the data, the history, and the global market, one of them has a significantly stronger case as an investment. Here's the honest answer." />
+  <link rel="canonical" href="https://whiskeybarrel.com/invest/scotch-vs-bourbon-casks-which-is-the-better-investment" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Scotch vs Bourbon Casks: Which Is the Better Investment?" />
+  <meta property="og:description" content="Both Scotch and bourbon casks have passionate advocates. But when you look at the data, the history, and the global market, one of them has a significantly stronger case as an investment." />
+  <meta property="og:url" content="https://whiskeybarrel.com/invest/scotch-vs-bourbon-casks-which-is-the-better-investment" />
+  <meta property="og:site_name" content="WhiskeyBarrel.com" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0D0D0D;
+      --surface:   #161616;
+      --border:    #2A2A2A;
+      --gold:      #C4922A;
+      --gold-h:    #D4A23A;
+      --text:      #D4C9B8;
+      --muted:     #A09890;
+      --hero-text: #F2EDE4;
+      --max:       1140px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 768px) { .wrap { padding: 0 24px; } }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(42, 42, 42, 0.6);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      color: var(--hero-text);
+      white-space: nowrap;
+    }
+
+    nav.desktop {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    nav.desktop a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.3s ease;
+    }
+    nav.desktop a:hover { color: var(--gold); }
+
+    .btn-subscribe {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      background: transparent;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      animation: pulse-subscribe 3s ease infinite;
+      white-space: nowrap;
+    }
+    .btn-subscribe:hover { background: var(--gold); color: var(--bg); animation: none; }
+
+    @keyframes pulse-subscribe {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.02); }
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: #0D0D0D;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--hero-text);
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      nav.desktop { display: none; }
+      .btn-subscribe { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── Article header ──────────────────────────────────────── */
+    .article-header {
+      padding: 140px 0 64px;
+      text-align: center;
+    }
+
+    .article-header .eyebrow { display: block; margin-bottom: 24px; }
+
+    .article-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(36px, 5vw, 64px);
+      color: var(--hero-text);
+      line-height: 1.1;
+      max-width: 820px;
+      margin: 0 auto 28px;
+      text-shadow: 0 0 80px rgba(196, 146, 42, 0.1);
+    }
+
+    .article-subhead {
+      font-size: clamp(16px, 1.8vw, 19px);
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    .article-meta {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 56px;
+    }
+
+    .article-divider {
+      height: 1px;
+      background: rgba(196, 146, 42, 0.2);
+      max-width: 740px;
+      margin: 0 auto;
+    }
+
+    /* ── Article body ────────────────────────────────────────── */
+    .article-body {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 64px 40px 100px;
+    }
+
+    @media (max-width: 768px) { .article-body { padding: 48px 24px 72px; } }
+
+    .article-body p {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .article-body p:last-child { margin-bottom: 0; }
+
+    .article-body h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 26px;
+      color: var(--hero-text);
+      margin-top: 48px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    /* ── Related articles ────────────────────────────────────── */
+    .related-section {
+      border-top: 1px solid var(--border);
+      padding: 72px 0;
+    }
+
+    .related-inner {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    @media (max-width: 768px) { .related-inner { padding: 0 24px; } }
+
+    .related-label {
+      display: block;
+      margin-bottom: 32px;
+    }
+
+    .related-card {
+      border-top: 1px solid rgba(196, 146, 42, 0.3);
+      padding-top: 24px;
+    }
+
+    .related-card .eyebrow { display: block; margin-bottom: 14px; }
+
+    .related-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 12px;
+      transition: color 0.3s ease;
+    }
+    .related-card:hover .related-card-title { color: var(--hero-text); }
+
+    .related-card-excerpt {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .link-cta {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      transition: opacity 0.3s ease;
+    }
+    .link-cta:hover { opacity: 0.7; }
+
+    /* ── Article footer ──────────────────────────────────────── */
+    .article-footer-divider {
+      height: 1px;
+      background: rgba(196, 146, 42, 0.2);
+      max-width: 740px;
+      margin: 0 auto;
+    }
+
+    .article-about {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 40px 40px 0;
+    }
+    @media (max-width: 768px) { .article-about { padding: 32px 24px 0; } }
+
+    .article-about p {
+      font-size: 14px;
+      font-weight: 300;
+      color: #9A9088;
+      line-height: 1.7;
+    }
+
+    .article-email-section {
+      background: var(--surface);
+      border-top: 1px solid rgba(196, 146, 42, 0.2);
+      margin-top: 64px;
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    .article-email-inner { max-width: 520px; margin: 0 auto; }
+    .article-email-inner .eyebrow { display: block; margin-bottom: 20px; }
+
+    .article-email-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(26px, 3vw, 38px);
+      color: var(--hero-text);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .article-email-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .email-form {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .email-form input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text);
+      width: 260px;
+      outline: none;
+      caret-color: var(--gold);
+      transition: border-color 0.3s ease;
+    }
+    .email-form input::placeholder { color: var(--muted); }
+    .email-form input:focus { border-bottom-color: var(--gold); }
+
+    .email-form button {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      padding: 14px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      white-space: nowrap;
+    }
+    .email-form button:hover { background: var(--gold-h); }
+
+    @media (max-width: 600px) {
+      .email-form { flex-direction: column; align-items: center; }
+      .email-form input { width: 100%; max-width: 300px; border: 1px solid var(--border); padding: 12px 16px; }
+      .email-form button { width: 100%; max-width: 300px; }
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      background: #0A0A0A;
+      border-top: 1px solid var(--border);
+      padding: 80px 0 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-tagline { font-size: 13px; font-weight: 300; color: var(--muted); }
+
+    .footer-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+
+    .footer-col-label { display: block; margin-bottom: 20px; }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+    .footer-col ul a {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      transition: color 0.4s ease;
+    }
+    .footer-col ul a:hover { color: var(--text); }
+
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; }
+    .footer-copy { font-size: 13px; color: rgba(160, 152, 144, 0.6); }
+    .social-links { display: flex; gap: 20px; align-items: center; }
+    .social-links a { color: var(--muted); transition: color 0.3s ease; display: flex; align-items: center; }
+    .social-links a:hover { color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .article-header { padding: 120px 24px 48px; }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-nav { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 20px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ MOBILE MENU ════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="closeMenu()">Learn</a>
+    <a href="#" onclick="closeMenu()">Invest</a>
+    <a href="#" onclick="closeMenu()">Reviews</a>
+    <a href="#" onclick="closeMenu()">Newsletter</a>
+    <a href="#" onclick="closeMenu()" style="color: var(--gold); font-family: 'Inter'; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 16px;">Subscribe Free</a>
+  </div>
+
+  <!-- ════ HEADER ════ -->
+  <header>
+    <div class="wrap header-inner">
+      <a href="/" class="logo">WHISKEY BARREL</a>
+      <nav class="desktop">
+        <a href="#">Learn</a>
+        <a href="#">Invest</a>
+        <a href="#">Reviews</a>
+        <a href="#">Newsletter</a>
+      </nav>
+      <button class="btn-subscribe" onclick="document.getElementById('article-newsletter').scrollIntoView({behavior:'smooth'})">Subscribe Free</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ════ ARTICLE HEADER ════ -->
+  <div class="article-header">
+    <div class="wrap">
+      <span class="eyebrow">Invest</span>
+      <h1 class="article-headline">Scotch vs Bourbon Casks: Which Is the Better Investment?</h1>
+      <p class="article-subhead">Both have passionate advocates. But when you look at the data, the history, and the global market, one of them has a significantly stronger case. Here's the honest answer.</p>
+      <p class="article-meta">7 min read &middot; WhiskeyBarrel.com</p>
+    </div>
+    <div class="article-divider"></div>
+  </div>
+
+  <!-- ════ ARTICLE BODY ════ -->
+  <div class="article-body reveal">
+
+    <p>Let's get the obvious thing out of the way first.</p>
+    <p>This is not an article about which whiskey tastes better. Taste is personal, regional, and entirely beside the point when you are making an investment decision. Some of the worst investments in history were made by people who confused personal enthusiasm with financial merit.</p>
+    <p>What we are talking about here is which cask, sitting in which warehouse, in which country, is more likely to be worth significantly more money in ten or twenty years than it is today.</p>
+    <p>When you frame it that way, the answer becomes clearer than most people expect.</p>
+
+    <h2>The Fundamental Difference Most People Miss</h2>
+    <p>Scotch whisky and American bourbon are governed by entirely different legal frameworks, and those frameworks have profound implications for investors.</p>
+    <p>Scotch whisky must be aged in oak casks in Scotland for a minimum of three years. But the market does not really care about three-year-old Scotch. The expressions that command serious money are aged ten, fifteen, twenty, twenty-five years and beyond. The longer the age statement, the scarcer the supply and the higher the price. A distillery cannot decide in 2026 to start producing more twenty-year-old single malt. That whisky is already in barrels right now, aging, or it will not exist until 2046.</p>
+    <p>Bourbon has its own rules. It must be made in the United States, aged in new charred oak containers, and distilled from a grain mixture that is at least 51% corn. There is no minimum age requirement for most bourbon, though straight bourbon requires at least two years. Crucially, bourbon must be aged in new barrels every time. Those barrels are then sold, typically to Scotch distilleries, rum producers, and others who use them for secondary maturation.</p>
+    <p>This single difference, new barrels for bourbon versus used barrels for Scotch, has enormous consequences for the investment case.</p>
+
+    <h2>Why Scotch Wins on the Global Stage</h2>
+    <p>The global market for premium aged Scotch is genuinely extraordinary. Over the past thirty years, demand from Asia has transformed what the world is willing to pay for exceptional single malt. Chinese collectors, Japanese enthusiasts, South Korean professionals with disposable income and sophisticated taste, all of them have entered the market for aged Scotch and driven prices to levels that would have seemed implausible two decades ago.</p>
+    <p>This is not a trend that is reversing. The middle class in Asia is still growing. The association between aged single malt Scotch and status, taste, and financial success is deeply embedded in markets that are still expanding. When you own a cask of well-regarded Scotch from a respected distillery, you are holding an asset that has genuine global demand, in multiple currencies, across multiple continents.</p>
+    <p>Bourbon does not have this yet. American whiskey is experiencing a genuine renaissance, and some expressions command remarkable prices at auction. But bourbon's premium market is still predominantly American. The global collector base for aged bourbon is growing, but it is a fraction of the established international market for aged Scotch. That difference matters when you are thinking about who your eventual buyer is going to be and how many of them exist.</p>
+
+    <h2>The Scarcity Equation</h2>
+    <p>Here is where the investment case for Scotch becomes particularly compelling.</p>
+    <p>Scotland has a finite number of distilleries. Many of the most coveted, Macallan, Springbank, Bowmore, Brora, Port Ellen, have either limited production capacity or have been closed for years, meaning genuinely old expressions from those distilleries become more scarce with every passing year as bottles are opened and consumed. You cannot make more of it. That is not a marketing line. It is a physical fact.</p>
+    <p>Bourbon production in the United States has expanded dramatically over the past fifteen years. Distilleries have opened across the country. Kentucky alone has more bourbon aging today than at any point in its history. This is great news for bourbon lovers. For investors it introduces a supply dynamic that works against scarcity premiums over time.</p>
+    <p>More supply, meeting growing demand, produces stable prices. Constrained supply, meeting growing demand, produces appreciation. The Scotch market structurally favors the latter scenario.</p>
+
+    <h2>The Case for Bourbon, Honestly Stated</h2>
+    <p>Intellectual honesty requires acknowledging what bourbon has going for it, because it is not nothing.</p>
+    <p>Entry prices for bourbon casks are generally lower than comparable Scotch. A young bourbon cask from a well-regarded Kentucky distillery can be purchased for less than many Scotch equivalents, which means the barrier to entry is lower for first-time investors.</p>
+    <p>The American bourbon market has also produced some extraordinary returns for people who identified the right distilleries early. Buffalo Trace allocations, Pappy Van Winkle releases, certain expressions from smaller craft producers, these have generated returns that rival or exceed anything the Scotch market has produced in the same period.</p>
+    <p>And bourbon has cultural momentum in a way that is genuinely hard to quantify but impossible to ignore. American whiskey is having a moment that shows no signs of ending. If that cultural energy translates into sustained international demand the way Scotch has managed over decades, the investment case improves significantly.</p>
+
+    <h2>The Honest Verdict</h2>
+    <p>If you are investing for the long term, with a time horizon of ten years or more, and you are choosing between a well-selected Scotch cask and a comparable bourbon cask, the evidence points clearly toward Scotch.</p>
+    <p>The global demand base is larger and more established. The scarcity dynamics are more favorable. The track record of sustained appreciation over multi-decade periods is more consistent. The secondary market is deeper, which means finding a buyer when you are ready to sell is generally less complicated.</p>
+    <p>That does not mean bourbon casks are a bad investment. For the right investor with genuine knowledge of the American whiskey market, a well-selected bourbon cask from the right distillery at the right price can absolutely outperform. Markets reward expertise, and if you have it, use it.</p>
+    <p>But if you are building a first position in whiskey casks, or allocating to the asset class without deep specialist knowledge of either market, Scotch is the more defensible choice. It has the longer track record, the broader global buyer base, and the supply constraints that drive appreciation over time.</p>
+    <p>There is a reason the most sophisticated alternative asset investors in the world, the family offices, the collectors with genuine financial acumen, overwhelmingly favor aged single malt Scotch when they allocate to this category. They are not doing it because they prefer the taste.</p>
+    <p>They are doing it because the numbers make sense.</p>
+
+    <h2>What This Means for You</h2>
+    <p>If you are seriously considering a first cask investment, here is the practical takeaway.</p>
+    <p>Start with Scotch from a distillery with a genuine reputation, not a marketing story. Look for expressions with real age, real provenance, and storage at a credible bonded warehouse. Pay what the market actually values the cask at, not what a broker with a commission tells you it is worth.</p>
+    <p>If you already have exposure to Scotch and want to diversify, a bourbon cask from a well-regarded Kentucky producer with a track record of auction performance is a reasonable addition. Not instead of Scotch. In addition to it.</p>
+    <p>The goal is not to pick a side in a cultural debate. The goal is to own assets that will be worth more money in the future than they cost you today.</p>
+    <p>On that basis, aged single malt Scotch has made its case more convincingly, over a longer period, in more markets around the world, than anything the American whiskey industry has yet produced.</p>
+    <p>That could change. But you invest in the world as it is, not as it might become.</p>
+
+  </div>
+
+  <!-- ════ RELATED ARTICLES ════ -->
+  <div class="related-section reveal">
+    <div class="related-inner">
+      <span class="eyebrow related-label">Related Reading</span>
+      <a href="/invest/why-whiskey-casks-are-the-alternative-investment-nobody-talks-about" class="related-card" style="display:block;">
+        <span class="eyebrow">Invest</span>
+        <h3 class="related-card-title">Why Whiskey Casks Are the Alternative Investment Nobody Talks About</h3>
+        <p class="related-card-excerpt">Most investors have never considered owning a whiskey cask. The ones who have are quietly building wealth in one of the most misunderstood alternative asset markets in the world.</p>
+        <span class="link-cta">Read →</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ════ ARTICLE FOOTER ════ -->
+  <div class="article-footer-divider"></div>
+
+  <div class="article-about">
+    <p>WhiskeyBarrel.com is an independent editorial resource covering whiskey culture and cask investing. We are not brokers. We do not sell casks. We earn revenue through newsletter sponsorships and affiliate partnerships, always disclosed.</p>
+  </div>
+
+  <div class="article-email-section" id="article-newsletter">
+    <div class="article-email-inner reveal">
+      <span class="eyebrow">The Barrel Brief</span>
+      <h2 class="article-email-headline">Get the intelligence. Stay ahead.</h2>
+      <p class="article-email-sub">Weekly whiskey cask investing insights, free forever.</p>
+      <form class="email-form" onsubmit="handleSubscribe(event, this)">
+        <input type="email" placeholder="Your email address" required />
+        <button type="submit">Subscribe Free →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <a href="/" class="logo">WHISKEY BARREL</a>
+        <span class="footer-tagline">Independent intelligence. No broker bias.</span>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Explore</span>
+          <ul>
+            <li><a href="#">Learn</a></li>
+            <li><a href="#">Invest</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="#">Newsletter</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Invest</span>
+          <ul>
+            <li><a href="#">Cask Investing 101</a></li>
+            <li><a href="#">Is Whiskey a Good Investment</a></li>
+            <li><a href="#">How to Buy a Cask</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Company</span>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Advertise</a></li>
+            <li><a href="#">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 WhiskeyBarrel.com</span>
+        <div class="social-links">
+          <a href="#" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="X (Twitter)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function handleSubscribe(e, form) {
+      e.preventDefault();
+      const email = form.querySelector('input[type="email"]').value;
+      const url = 'https://magic.beehiiv.com/v1/ba8c62a9-a5af-4530-ad1e-9010aa2831d1?email=' + encodeURIComponent(email);
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
