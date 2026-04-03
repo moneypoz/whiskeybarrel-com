@@ -12,21 +12,9 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About WhiskeyBarrel.com — Independent Intelligence on Whiskey Cask Investing</title>
-  <meta name="description" content="WhiskeyBarrel.com is an independent editorial resource covering whiskey culture and cask investing. No broker relationships. No paid placements. Just honest intelligence." />
-  <link rel="canonical" href="https://whiskeybarrel.com/about" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="About WhiskeyBarrel.com" />
-  <meta property="og:description" content="Independent intelligence on whiskey cask investing. No broker relationships. No paid placements. Just honest analysis." />
-  <meta property="og:url" content="https://whiskeybarrel.com/about" />
-  <meta property="og:site_name" content="WhiskeyBarrel.com" />
-  <meta property="og:image" content="https://whiskeybarrel.com/images/about-whiskey-barrels.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="675" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://whiskeybarrel.com/images/about-whiskey-barrels.jpg" />
+  <title>Contact WhiskeyBarrel.com — Partnerships, Press and General Inquiries</title>
+  <meta name="description" content="Get in touch with WhiskeyBarrel.com for partnership opportunities, press inquiries, or general questions about whiskey cask investing." />
+  <link rel="canonical" href="https://whiskeybarrel.com/contact" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -245,7 +233,7 @@
       font-size: clamp(16px, 1.8vw, 19px);
       font-weight: 300;
       color: var(--muted);
-      max-width: 620px;
+      max-width: 520px;
       margin: 0 auto 56px;
       line-height: 1.7;
     }
@@ -258,20 +246,49 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       PAGE BODY
+       CONTACT BODY
     ════════════════════════════════════════════════════════ */
-    .page-body {
+    .contact-body {
       max-width: 740px;
       margin: 0 auto;
-      padding: 64px 40px 80px;
+      padding: 72px 40px 100px;
     }
 
     @media (max-width: 768px) {
       .page-header { padding: 120px 24px 48px; }
-      .page-body { padding: 48px 24px 64px; }
+      .contact-body { padding: 48px 24px 72px; }
     }
 
-    .page-body p {
+    .contact-section {
+      padding-bottom: 60px;
+    }
+
+    .contact-section + .contact-section {
+      padding-top: 60px;
+      border-top: 1px solid rgba(196, 146, 42, 0.15);
+    }
+
+    .contact-section-eyebrow {
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .contact-section-rule {
+      height: 1px;
+      background: rgba(196, 146, 42, 0.3);
+      margin-bottom: 28px;
+    }
+
+    .contact-section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 24px;
+      color: var(--hero-text);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .contact-section p {
       font-size: 17px;
       font-weight: 300;
       line-height: 1.9;
@@ -279,56 +296,22 @@
       margin-bottom: 28px;
     }
 
-    .page-body p:last-child { margin-bottom: 0; }
-
-    .page-body h2 {
+    .contact-email {
+      display: block;
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-size: 26px;
-      color: var(--hero-text);
-      margin-top: 48px;
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    /* ════════════════════════════════════════════════════════
-       VALUES SECTION
-    ════════════════════════════════════════════════════════ */
-    .values-section {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 0 40px 100px;
-    }
-
-    @media (max-width: 768px) {
-      .values-section { padding: 0 24px 72px; }
-    }
-
-    .values-label {
-      display: block;
-      margin-bottom: 48px;
-    }
-
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
-    }
-
-    @media (max-width: 768px) {
-      .values-grid { grid-template-columns: 1fr; gap: 36px; }
-    }
-
-    .value-col-label {
-      display: block;
+      font-style: italic;
+      font-size: 28px;
+      color: var(--gold);
       margin-bottom: 16px;
+      transition: opacity 0.3s ease;
     }
+    .contact-email:hover { opacity: 0.7; }
 
-    .value-col p {
-      font-size: 15px;
+    .contact-note {
+      font-size: 13px;
       font-weight: 300;
-      color: #9A9088;
-      line-height: 1.7;
+      color: #6B6560;
+      line-height: 1.6;
     }
 
     /* ════════════════════════════════════════════════════════
@@ -520,69 +503,57 @@
   <!-- ════ PAGE HEADER ════ -->
   <div class="page-header">
     <div class="wrap">
-      <span class="eyebrow">About</span>
-      <h1 class="page-headline">Built for the Investor Nobody Was Talking To</h1>
-      <p class="page-subhead">WhiskeyBarrel.com exists because the best information about whiskey cask investing was scattered, biased, or buried behind broker sales pitches. We decided to fix that.</p>
+      <span class="eyebrow">Contact</span>
+      <h1 class="page-headline">Get in Touch</h1>
+      <p class="page-subhead">We read every message. We respond to every serious inquiry.</p>
     </div>
     <div class="page-divider"></div>
   </div>
 
-  <!-- ════ PAGE BODY ════ -->
-  <div class="page-body reveal">
+  <!-- ════ CONTACT BODY ════ -->
+  <div class="contact-body">
 
-    <h2>Why This Site Exists</h2>
-    <p>The whiskey cask investment market is real, it is growing, and it has quietly made serious money for the people who understood it early. It has also burned investors who trusted the wrong sources, paid inflated prices, and had no independent place to turn for honest information.</p>
-    <p>That is the problem WhiskeyBarrel.com was built to solve.</p>
-    <p>We are not a broker. We do not sell casks. We do not earn commissions on transactions. We have no financial relationship with any distillery, warehouse, or investment platform that would compromise what we tell you.</p>
-    <p>What we are is an independent editorial resource. We research, we write, and we publish. Our job is to give you the clearest, most honest picture of the whiskey cask market that exists anywhere on the internet.</p>
-
-    <h2>What We Cover</h2>
-    <p>WhiskeyBarrel.com covers three things and three things only.</p>
-    <p>The investment case for whiskey casks. How the market works, what drives appreciation, what the risks are, and how to evaluate brokers and distilleries without getting taken advantage of.</p>
-    <p>The culture and craft behind whiskey. You cannot understand the investment without understanding the product. We cover barrel aging, distillery regions, production methods, and the factors that separate genuinely great whiskey from marketing dressed up as craftsmanship.</p>
-    <p>Independent reviews and recommendations. Honest assessments of whiskies, brokers, and resources, based on research and analysis rather than paid placements or affiliate pressure.</p>
-
-    <h2>How We Make Money</h2>
-    <p>This is the part most sites bury in fine print. We put it here because you deserve to know.</p>
-    <p>WhiskeyBarrel.com earns revenue through two sources. Newsletter sponsorships, where brands pay to reach our audience, and affiliate partnerships, where we earn a commission if you purchase a product through one of our links. Both are always disclosed clearly in the content where they appear.</p>
-    <p>We do not accept payment for editorial coverage. A brand cannot pay to be reviewed favorably or featured in our content. The editorial side of this site is completely independent of the commercial side, and we intend to keep it that way.</p>
-
-    <h2>The Barrel Brief</h2>
-    <p>Our free weekly newsletter goes out every week to investors, enthusiasts, and professionals who want to stay ahead of the whiskey cask market. New releases, investment analysis, broker intelligence, and the information that serious people actually need.</p>
-    <p>It is free. It will stay free. Subscribe below.</p>
-
-    <h2>A Note on Independence</h2>
-    <p>The whiskey cask market has a trust problem. In 2025, several large operators collapsed, leaving investors with paperwork but no barrels. Marketing dressed up as analysis convinced people to pay prices the market would never support. Brokers presented projected returns as though they were guarantees.</p>
-    <p>WhiskeyBarrel.com was built in direct response to that environment. We believe the market needs an independent voice that has no stake in what you buy, where you buy it, or whether you buy at all.</p>
-    <p>That independence is not just a policy. It is the entire point.</p>
-
-  </div>
-
-  <!-- ════ VALUES SECTION ════ -->
-  <div class="values-section reveal">
-    <span class="eyebrow values-label">What We Stand For</span>
-    <div class="values-grid">
-      <div class="value-col">
-        <span class="eyebrow value-col-label">Independent</span>
-        <p>No broker relationships. No distillery partnerships that influence coverage. No paid placements in editorial content. Ever.</p>
-      </div>
-      <div class="value-col">
-        <span class="eyebrow value-col-label">Honest</span>
-        <p>We tell you what the data shows, including the risks, the failures, and the parts of this market that deserve serious scrutiny.</p>
-      </div>
-      <div class="value-col">
-        <span class="eyebrow value-col-label">Useful</span>
-        <p>Every piece of content on this site exists to help you make better decisions. Not to impress you, not to sell you, just to be genuinely useful.</p>
-      </div>
+    <!-- General Inquiries -->
+    <div class="contact-section reveal">
+      <span class="eyebrow contact-section-eyebrow">General</span>
+      <div class="contact-section-rule"></div>
+      <h2 class="contact-section-heading">General Inquiries</h2>
+      <p>For questions about our content, corrections, or anything else, reach us at:</p>
+      <a class="contact-email" href="mailto:sarah@whiskeybarrel.com">sarah@whiskeybarrel.com</a>
+      <p class="contact-note">We aim to respond within 48 hours.</p>
     </div>
+
+    <!-- Partnerships -->
+    <div class="contact-section reveal">
+      <span class="eyebrow contact-section-eyebrow">Partnerships</span>
+      <div class="contact-section-rule"></div>
+      <h2 class="contact-section-heading">Work With Us</h2>
+      <p>WhiskeyBarrel.com works with a select number of partners whose products and services are genuinely relevant to our audience of whiskey enthusiasts and alternative asset investors.</p>
+      <p>We are open to newsletter sponsorships, content partnerships, and affiliate arrangements with distilleries, brokers, investment platforms, and whiskey-adjacent brands that meet our editorial standards.</p>
+      <p>We do not accept payment for editorial coverage. All commercial relationships are clearly disclosed to our readers.</p>
+      <a class="contact-email" href="mailto:sarah@whiskeybarrel.com?subject=Partnership Inquiry — WhiskeyBarrel.com">sarah@whiskeybarrel.com</a>
+      <p class="contact-note">Please include details about your brand, your audience, and what you have in mind. We review all partnership inquiries personally.</p>
+    </div>
+
+    <!-- Press -->
+    <div class="contact-section reveal">
+      <span class="eyebrow contact-section-eyebrow">Press</span>
+      <div class="contact-section-rule"></div>
+      <h2 class="contact-section-heading">Press and Media</h2>
+      <p>WhiskeyBarrel.com covers the whiskey cask investment market independently and without broker bias. We are available for comment, interview, and expert perspective on whiskey as an alternative asset class, market trends, and investor education.</p>
+      <p>For press inquiries, interview requests, and media partnerships:</p>
+      <a class="contact-email" href="mailto:sarah@whiskeybarrel.com?subject=Press Inquiry — WhiskeyBarrel.com">sarah@whiskeybarrel.com</a>
+      <p class="contact-note">We respond to press inquiries within 24 hours.</p>
+    </div>
+
   </div>
 
   <!-- ════ EMAIL CAPTURE ════ -->
   <section id="page-newsletter" class="page-email-section">
     <div class="page-email-inner reveal">
       <span class="eyebrow">The Barrel Brief</span>
-      <h2 class="page-email-headline">Independent intelligence, delivered every week.</h2>
-      <p class="page-email-sub">Free forever. No spam. No broker bias.</p>
+      <h2 class="page-email-headline">Stay ahead of the market.</h2>
+      <p class="page-email-sub">Weekly whiskey cask investing intelligence. Free forever.</p>
       <form class="email-form" onsubmit="handleSubscribe(event, this)">
         <input type="email" placeholder="Your email address" required />
         <button type="submit">SUBSCRIBE FREE →</button>

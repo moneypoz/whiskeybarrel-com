@@ -48,4 +48,10 @@
     <priority>0.7</priority>
     <lastmod>2026-04-03</lastmod>
   </url>
+  <url>
+    <loc>https://whiskeybarrel.com/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-03</lastmod>
+  </url>
 </urlset>
