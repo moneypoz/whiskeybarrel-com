@@ -10,7 +10,7 @@
     <loc>https://whiskeybarrel.com/invest</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-04-02</lastmod>
+    <lastmod>2026-04-05</lastmod>
   </url>
   <url>
     <loc>https://whiskeybarrel.com/learn</loc>
@@ -26,9 +26,15 @@
   </url>
   <url>
     <loc>https://whiskeybarrel.com/newsletter</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-05</lastmod>
+  </url>
+  <url>
+    <loc>https://whiskeybarrel.com/advertise</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-04-02</lastmod>
+    <priority>0.8</priority>
+    <lastmod>2026-04-05</lastmod>
   </url>
   <url>
     <loc>https://whiskeybarrel.com/invest/why-whiskey-casks-are-the-alternative-investment-nobody-talks-about</loc>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SS0SZWSV6J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SS0SZWSV6J');
+  </script>
+  <script async data-id="101504026" src="//static.getclicky.com/js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Media Kit | WhiskeyBarrel.com</title>
+  <meta name="description" content="WhiskeyBarrel.com media kit for advertising partners and sponsors." />
+  <link rel="canonical" href="https://whiskeybarrel.com/media-kit" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0D0D0D;
+      --surface:   #161616;
+      --border:    #2A2A2A;
+      --gold:      #C4922A;
+      --gold-h:    #D4A23A;
+      --text:      #D4C9B8;
+      --muted:     #A09890;
+      --hero-text: #F2EDE4;
+      --max:       1140px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 768px) { .wrap { padding: 0 24px; } }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Header ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(42,42,42,0.6);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      color: var(--hero-text);
+      white-space: nowrap;
+    }
+    nav.desktop {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+    nav.desktop a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.3s ease;
+    }
+    nav.desktop a:hover { color: var(--gold); }
+    .btn-contact {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      background: transparent;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn-contact:hover { background: var(--gold); color: var(--bg); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: #0D0D0D;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--hero-text);
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    @media (max-width: 900px) {
+      nav.desktop { display: none; }
+      .btn-contact { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+      padding: 140px 0 72px;
+      text-align: center;
+    }
+    .page-header .eyebrow {
+      display: block;
+      margin-bottom: 24px;
+    }
+    .page-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      color: var(--hero-text);
+      line-height: 1.05;
+      margin: 0 auto 20px;
+    }
+    .page-subhead {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+    .page-header-rule {
+      height: 1px;
+      background: rgba(196,146,42,0.2);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) { .page-header { padding: 120px 24px 56px; } }
+
+    /* ── Content ── */
+    .mk-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px 100px;
+    }
+    @media (max-width: 768px) { .mk-content { padding: 0 24px 72px; } }
+
+    .mk-section {
+      padding: 64px 0;
+      border-bottom: 1px solid rgba(196,146,42,0.12);
+    }
+    .mk-section:last-of-type { border-bottom: none; }
+
+    .mk-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 28px;
+      color: var(--hero-text);
+      margin-bottom: 28px;
+      line-height: 1.2;
+    }
+
+    .mk-body {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.85;
+      max-width: 700px;
+    }
+
+    /* ── Audience grid ── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(196,146,42,0.15);
+      border: 1px solid rgba(196,146,42,0.15);
+    }
+    @media (max-width: 640px) { .audience-grid { grid-template-columns: repeat(2, 1fr); } }
+    .audience-point {
+      background: var(--bg);
+      padding: 28px 24px;
+    }
+    .audience-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #6B6560;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .audience-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--hero-text);
+      line-height: 1.25;
+    }
+
+    /* ── Sponsorship table ── */
+    .mk-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid rgba(196,146,42,0.15);
+    }
+    .mk-table th {
+      background: var(--surface);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1px solid rgba(196,146,42,0.15);
+    }
+    .mk-table td {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text);
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(196,146,42,0.08);
+      line-height: 1.6;
+      vertical-align: top;
+    }
+    .mk-table tr:last-child td { border-bottom: none; }
+    .mk-table tr:nth-child(odd) td { background: #0D0D0D; }
+    .mk-table tr:nth-child(even) td { background: #161616; }
+
+    /* ── Contact CTA ── */
+    .mk-cta {
+      margin-top: 32px;
+    }
+    .btn-cta {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      background: transparent;
+      padding: 16px 40px;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 40px;
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .footer-tagline { font-size: 13px; color: var(--muted); letter-spacing: 0.05em; }
+    .footer-nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 768px) { .footer-nav { grid-template-columns: repeat(2, 1fr); } }
+    .footer-col-label { display: block; margin-bottom: 16px; font-size: 10px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 13px; color: var(--muted); transition: color 0.3s ease; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-copy { font-size: 12px; color: #6B6560; }
+    .social-links { display: flex; gap: 20px; }
+    .social-links a { color: var(--muted); transition: color 0.3s ease; }
+    .social-links a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- ════ HEADER ════ -->
+  <header>
+    <div class="wrap header-inner">
+      <a href="/" class="logo">WHISKEY BARREL</a>
+      <nav class="desktop">
+        <a href="/invest">Invest</a>
+        <a href="#">Learn</a>
+        <a href="#">Reviews</a>
+        <a href="/barrel-picks">Barrel Picks</a>
+        <a href="/newsletter">Newsletter</a>
+      </nav>
+      <a href="mailto:partners@whiskeybarrel.com" class="btn-contact">Contact Us</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/invest" onclick="closeMenu()">Invest</a>
+    <a href="#" onclick="closeMenu()">Learn</a>
+    <a href="#" onclick="closeMenu()">Reviews</a>
+    <a href="/barrel-picks" onclick="closeMenu()">Barrel Picks</a>
+    <a href="/newsletter" onclick="closeMenu()">Newsletter</a>
+  </div>
+
+  <!-- ════ PAGE HEADER ════ -->
+  <div class="page-header">
+    <div class="wrap">
+      <span class="eyebrow">Media Kit</span>
+      <h1 class="page-headline">WhiskeyBarrel.com</h1>
+      <p class="page-subhead">For advertising partners and sponsors</p>
+    </div>
+    <div class="page-header-rule"></div>
+  </div>
+
+  <!-- ════ CONTENT ════ -->
+  <div class="mk-content">
+
+    <div class="mk-section reveal">
+      <h2 class="mk-headline">About WhiskeyBarrel.com</h2>
+      <p class="mk-body">WhiskeyBarrel.com is an independent editorial resource covering whiskey culture and cask investing for high-income American investors. We publish in-depth research, market analysis, and investor guidance written without broker bias or commercial influence.</p>
+    </div>
+
+    <div class="mk-section reveal">
+      <h2 class="mk-headline">Audience Profile</h2>
+      <div class="audience-grid">
+        <div class="audience-point">
+          <span class="audience-label">Audience</span>
+          <span class="audience-value">Accredited US Investors</span>
+        </div>
+        <div class="audience-point">
+          <span class="audience-label">Content Focus</span>
+          <span class="audience-value">Whiskey Cask Investing</span>
+        </div>
+        <div class="audience-point">
+          <span class="audience-label">Publication</span>
+          <span class="audience-value">Weekly Newsletter</span>
+        </div>
+        <div class="audience-point">
+          <span class="audience-label">Geography</span>
+          <span class="audience-value">United States</span>
+        </div>
+        <div class="audience-point">
+          <span class="audience-label">Editorial Stance</span>
+          <span class="audience-value">Independent — No Broker Affiliation</span>
+        </div>
+        <div class="audience-point">
+          <span class="audience-label">Contact</span>
+          <span class="audience-value" style="font-size: 16px;">partners@whiskeybarrel.com</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mk-section reveal">
+      <h2 class="mk-headline">Sponsorship Options</h2>
+      <table class="mk-table">
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Description</th>
+            <th>Availability</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Newsletter Sponsorship</td>
+            <td>Dedicated placement in The Barrel Brief weekly newsletter</td>
+            <td>Weekly</td>
+          </tr>
+          <tr>
+            <td>Site Sponsorship</td>
+            <td>Contextual placement within editorial content</td>
+            <td>Monthly</td>
+          </tr>
+          <tr>
+            <td>Content Partnership</td>
+            <td>Sponsored editorial content, clearly disclosed</td>
+            <td>Limited — by application</td>
+          </tr>
+          <tr>
+            <td>Affiliate Arrangement</td>
+            <td>Performance-based commission on qualified leads or conversions</td>
+            <td>Select partners only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mk-section reveal">
+      <h2 class="mk-headline">Get In Touch</h2>
+      <p class="mk-body">To discuss partnership opportunities, email us at partners@whiskeybarrel.com. We respond within 48 hours.</p>
+      <div class="mk-cta">
+        <a href="mailto:partners@whiskeybarrel.com" class="btn-cta">partners@whiskeybarrel.com</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <a href="/" class="logo">WHISKEY BARREL</a>
+        <span class="footer-tagline">Independent intelligence. No broker bias.</span>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Explore</span>
+          <ul>
+            <li><a href="#">Learn</a></li>
+            <li><a href="/invest">Invest</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="/newsletter">Newsletter</a></li>
+            <li><a href="/barrel-picks">Barrel Picks</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Invest</span>
+          <ul>
+            <li><a href="#">Cask Investing 101</a></li>
+            <li><a href="#">Is Whiskey a Good Investment</a></li>
+            <li><a href="#">How to Buy a Cask</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Company</span>
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/advertise">Advertise</a></li>
+            <li><a href="#">Disclaimer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="eyebrow footer-col-label">Partner</span>
+          <ul>
+            <li><a href="/advertise">Advertise</a></li>
+            <li><a href="/media-kit">Media Kit</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 WhiskeyBarrel.com</span>
+        <div class="social-links">
+          <a href="#" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="X (Twitter)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
