@@ -333,32 +333,34 @@
       .questions-box { padding: 28px 24px; }
     }
 
-    .question-item {
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-    }
-
     .question-item + .question-item {
-      margin-top: 24px;
+      border-top: 1px solid rgba(196, 146, 42, 0.15);
+      padding-top: 28px;
+      margin-top: 28px;
     }
 
     .question-num {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-size: 32px;
-      color: rgba(196, 146, 42, 0.3);
+      color: rgba(196, 146, 42, 0.4);
       line-height: 1.2;
-      flex-shrink: 0;
-      width: 44px;
+      margin-bottom: 8px;
     }
 
     .question-text {
-      font-size: 16px;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--hero-text);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .question-explanation {
+      font-size: 15px;
       font-weight: 300;
-      color: var(--text);
+      color: #9A9088;
       line-height: 1.8;
-      padding-top: 4px;
     }
 
     /* ════════════════════════════════════════════════════════
@@ -681,32 +683,39 @@
 
     <div class="questions-box">
       <div class="question-item">
-        <span class="question-num">01</span>
-        <p class="question-text">Does the cask come with a Delivery Order acknowledged by the warehouse? Not a certificate. Not a deed. A Delivery Order, acknowledged by the actual warehouse where the cask is stored. If the answer is no, or if the broker is vague or evasive, stop the conversation there.</p>
+        <p class="question-num">01</p>
+        <p class="question-text">Does the cask come with a Delivery Order acknowledged by the warehouse?</p>
+        <p class="question-explanation">Not a certificate. Not a deed. A Delivery Order, acknowledged by the actual warehouse where the cask is stored. If the answer is no, or if the broker is vague or evasive, stop the conversation there.</p>
       </div>
       <div class="question-item">
-        <span class="question-num">02</span>
-        <p class="question-text">Which specific bonded warehouse will your cask be stored in? You want the name of the warehouse, its location in Scotland, and confirmation that it is HMRC-approved. A legitimate broker will tell you this immediately. A broker who gives you vague answers about secure facilities is telling you something important.</p>
+        <p class="question-num">02</p>
+        <p class="question-text">Which specific bonded warehouse will my cask be stored in?</p>
+        <p class="question-explanation">You want the name of the warehouse, its location in Scotland, and confirmation that it is HMRC-approved. A legitimate broker will tell you this immediately. Vague answers about secure facilities are a warning sign.</p>
       </div>
       <div class="question-item">
-        <span class="question-num">03</span>
-        <p class="question-text">Can you contact the warehouse directly to verify your ownership after purchase? The answer should be yes, without hesitation. If a broker tells you that communication with the warehouse goes through them, that is a significant warning sign.</p>
+        <p class="question-num">03</p>
+        <p class="question-text">Can I contact the warehouse directly to verify my ownership after purchase?</p>
+        <p class="question-explanation">The answer should be yes, without hesitation. If a broker tells you that communication with the warehouse goes through them, that is a significant warning sign.</p>
       </div>
       <div class="question-item">
-        <span class="question-num">04</span>
-        <p class="question-text">What are the exit options and who controls them? A legitimate broker will explain that you can sell to independent bottlers, to other investors, or through auction. The broker should not be the only route to resale. If they are, you are entirely dependent on them when it comes time to get your money out.</p>
+        <p class="question-num">04</p>
+        <p class="question-text">What are the exit options and who controls them?</p>
+        <p class="question-explanation">You should be able to sell to independent bottlers, other investors, or through auction. The broker should not be the only route to resale. If they are, you are entirely dependent on them when it comes time to get your money out.</p>
       </div>
       <div class="question-item">
-        <span class="question-num">05</span>
-        <p class="question-text">What are the total costs over the holding period? Storage fees, insurance, sampling costs, and eventual bottling or transfer fees should all be disclosed clearly upfront. Reputable brokers are transparent about this. Brokers who give you a purchase price and wave away ongoing costs are not giving you an accurate picture of your returns.</p>
+        <p class="question-num">05</p>
+        <p class="question-text">What are the total costs over the holding period?</p>
+        <p class="question-explanation">Storage fees, insurance, sampling costs, and eventual bottling or transfer fees should all be disclosed clearly upfront. Brokers who wave away ongoing costs are not giving you an accurate picture of your returns.</p>
       </div>
       <div class="question-item">
-        <span class="question-num">06</span>
-        <p class="question-text">What insurance covers your cask and for how much? The cask should be insured against fire, theft, and accidental damage. You want to know who holds the policy, what the coverage limits are, and whether the coverage reflects the full market value of the cask rather than just its original cost.</p>
+        <p class="question-num">06</p>
+        <p class="question-text">What insurance covers my cask and for how much?</p>
+        <p class="question-explanation">The cask should be insured against fire, theft, and accidental damage. You want to know who holds the policy, what the coverage limits are, and whether coverage reflects the full market value of the cask rather than just its original cost.</p>
       </div>
       <div class="question-item">
-        <span class="question-num">07</span>
-        <p class="question-text">How long has the company been operating and can you speak to existing clients? The whiskey cask market has seen a steady stream of firms launch with professional websites, slick social media, and polished sales materials, only to disappear within a few years. Longevity and verifiable client references are not guarantees of legitimacy, but their absence is worth noting.</p>
+        <p class="question-num">07</p>
+        <p class="question-text">How long has the company been operating and can I speak to existing clients?</p>
+        <p class="question-explanation">The whiskey cask market has seen a steady stream of firms launch with professional materials, only to disappear within a few years. Longevity and verifiable client references are not guarantees of legitimacy, but their absence is worth noting.</p>
       </div>
     </div>
 
