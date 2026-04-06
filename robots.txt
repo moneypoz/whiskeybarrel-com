@@ -2,4 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /media-kit
 Disallow: /media-kit.html
+Disallow: /disclaimer
+Disallow: /disclaimer.html
 Sitemap: https://whiskeybarrel.com/sitemap.xml
