@@ -1,0 +1,51 @@
+name: IndexNow on deploy
+
+# When pages or the sitemap change on main, notify IndexNow (Bing, Yandex, etc.)
+# for the affected URLs so they get recrawled quickly. The IndexNow key is public
+# by design (it's published at /<key>.txt), so no secrets are required.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'sitemap.xml'
+
+# Avoid overlapping runs when several pushes land close together.
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Determine changed HTML files
+        id: changed
+        run: |
+          BASE="${{ github.event.before }}"
+          if ! git cat-file -e "${BASE}^{commit}" 2>/dev/null; then
+            BASE="$(git rev-parse HEAD~1 2>/dev/null || true)"
+          fi
+          if [ -n "$BASE" ]; then
+            FILES=$(git diff --name-only --diff-filter=AM "$BASE" "${{ github.sha }}" -- '*.html' | tr '\n' ' ')
+          else
+            FILES=$(git ls-files '*.html' | tr '\n' ' ')
+          fi
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "Changed HTML: ${FILES:-<none>}"
+
+      # IndexNow crawls the URL to read the new content, so wait for Netlify to
+      # publish first. Timing isn't critical — it's just a nudge — but this avoids
+      # pinging before the deploy is live.
+      - name: Wait for Netlify to publish
+        if: steps.changed.outputs.files != ''
+        run: sleep 90
+
+      - name: Submit changed pages to IndexNow
+        if: steps.changed.outputs.files != ''
+        run: node .github/scripts/indexnow.mjs ${{ steps.changed.outputs.files }}
