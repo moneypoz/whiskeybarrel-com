@@ -4,4 +4,5 @@ Disallow: /media-kit
 Disallow: /media-kit.html
 Disallow: /disclaimer
 Disallow: /disclaimer.html
+Disallow: /cdn-cgi/
 Sitemap: https://whiskeybarrel.com/sitemap.xml
