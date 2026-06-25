@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<!--
+  SEO CONTENT INTELLIGENCE DASHBOARD — see the JS comment block below for usage.
+  Internal tool. Not linked from site nav or footer.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>SEO Content Intelligence Dashboard</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #111111;
+    --surface: #1a1a1a;
+    --surface-2: #202020;
+    --border: #2a2a2a;
+    --accent: #C4922A;
+    --text: #E8E0D0;
+    --muted: #8c857c;
+    --critical: #e05555;
+    --high: #e0a02a;
+    --opportunity: #4a9ed8;
+    --good: #4caf72;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .brand { display: flex; align-items: baseline; gap: 12px; }
+  .brand h1 { font-size: 16px; font-weight: 600; letter-spacing: 0.02em; }
+  .brand .sub { font-size: 12px; color: var(--muted); }
+  .brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+  .settings-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  button, .btn, label.filebtn {
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  button:hover, .btn:hover, label.filebtn:hover { border-color: var(--accent); }
+  button.primary { background: var(--accent); color: #1a1300; border-color: var(--accent); font-weight: 600; }
+  button.danger:hover { border-color: var(--critical); color: var(--critical); }
+
+  nav.tabs {
+    display: flex;
+    gap: 4px;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    overflow-x: auto;
+  }
+  nav.tabs button {
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    border-radius: 0;
+    padding: 14px 18px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  nav.tabs button:hover { color: var(--text); }
+  nav.tabs button.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  main { padding: 24px; max-width: 1280px; margin: 0 auto; }
+  .tab { display: none; }
+  .tab.active { display: block; }
+
+  .tab-intro { margin-bottom: 18px; }
+  .tab-intro h2 { font-size: 18px; margin-bottom: 4px; }
+  .tab-intro p { color: var(--muted); font-size: 13px; max-width: 760px; }
+
+  /* Upload zone */
+  .dropzone {
+    border: 1.5px dashed var(--border);
+    border-radius: 8px;
+    padding: 22px;
+    text-align: center;
+    color: var(--muted);
+    background: var(--surface);
+    margin-bottom: 22px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .dropzone.drag { border-color: var(--accent); background: var(--surface-2); }
+  .dropzone strong { color: var(--text); }
+  .dropzone .row { display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+  .hidden-input { display: none; }
+
+  /* Summary cards */
+  .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 22px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .card .value { font-size: 26px; font-weight: 700; margin-top: 6px; }
+  .card.critical .value { color: var(--critical); }
+  .card.high .value { color: var(--high); }
+  .card.opportunity .value { color: var(--opportunity); }
+  .card .delta { font-size: 12px; margin-top: 4px; }
+  .delta.up { color: var(--good); }
+  .delta.down { color: var(--critical); }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 22px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    text-align: left;
+    padding: 11px 14px;
+    background: var(--surface-2);
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid var(--border);
+  }
+  thead th:hover { color: var(--text); }
+  thead th .arrow { color: var(--accent); margin-left: 4px; }
+  tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--surface); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.url { max-width: 420px; word-break: break-word; color: var(--text); }
+
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
+  .badge.critical { background: rgba(224,85,85,.15); color: var(--critical); }
+  .badge.high { background: rgba(224,160,42,.15); color: var(--high); }
+  .badge.opportunity { background: rgba(74,158,216,.15); color: var(--opportunity); }
+  .badge.orphaned { background: rgba(224,85,85,.15); color: var(--critical); }
+  .badge.ok { background: rgba(76,175,114,.15); color: var(--good); }
+  .badge.poor { background: rgba(224,160,42,.15); color: var(--high); }
+  .badge.noclick { background: rgba(74,158,216,.15); color: var(--opportunity); }
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; margin-bottom: 22px; }
+  .panel h3 { font-size: 14px; margin-bottom: 12px; }
+  .empty { color: var(--muted); padding: 18px; text-align: center; font-size: 13px; }
+
+  .chart-svg { width: 100%; height: auto; display: block; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; font-size: 12px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  /* Linking matrix */
+  .matrix-wrap { overflow: auto; max-height: 60vh; border: 1px solid var(--border); border-radius: 8px; }
+  table.matrix th, table.matrix td { border: 1px solid var(--border); padding: 7px 9px; font-size: 12px; }
+  table.matrix thead th { position: sticky; top: 0; z-index: 3; }
+  table.matrix tbody th { position: sticky; left: 0; z-index: 2; background: var(--surface-2); text-align: left; max-width: 220px; cursor: default; }
+  table.matrix thead th.corner { position: sticky; left: 0; z-index: 4; }
+  table.matrix td { text-align: center; }
+  table.matrix td:hover { background: var(--surface); }
+  table.matrix input { accent-color: var(--accent); cursor: pointer; }
+  .colhead { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; max-height: 130px; overflow: hidden; cursor: default; }
+
+  textarea, input[type=text] {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    resize: vertical;
+  }
+  textarea:focus, input[type=text]:focus { outline: none; border-color: var(--accent); }
+
+  .note-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .note-item:last-child { border-bottom: none; }
+  .note-item .date { color: var(--accent); font-size: 12px; min-width: 92px; }
+  .note-item .text { flex: 1; }
+  .note-item button { padding: 3px 9px; font-size: 12px; }
+
+  .row-flex { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+  .muted { color: var(--muted); }
+  .small { font-size: 12px; }
+  .mb8 { margin-bottom: 8px; }
+  .mt12 { margin-top: 12px; }
+  .tag-warn { color: var(--high); font-size: 12px; margin-bottom: 12px; display: block; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span class="dot"></span>
+    <h1 id="siteName">SEO Dashboard</h1>
+    <span class="sub" id="siteUrl"></span>
+  </div>
+  <div class="settings-actions">
+    <button id="exportAllBtn">Export All (JSON)</button>
+    <label class="filebtn" for="importAllInput">Import (JSON)</label>
+    <input type="file" id="importAllInput" class="hidden-input" accept=".json" />
+    <button id="clearAllBtn" class="danger">Clear All Data</button>
+  </div>
+</div>
+
+<nav class="tabs">
+  <button data-tab="audit" class="active">Content Audit</button>
+  <button data-tab="linking">Internal Linking</button>
+  <button data-tab="gaps">Content Gaps</button>
+  <button data-tab="progress">Progress</button>
+</nav>
+
+<main>
+
+  <!-- ========== TAB 1: CONTENT AUDIT ========== -->
+  <section class="tab active" id="tab-audit">
+    <div class="tab-intro">
+      <h2>Content Audit</h2>
+      <p>Upload your weekly GSC <strong>Pages</strong> performance CSV (columns: Top pages, Clicks, Impressions, CTR, Position). The tool flags the highest-impact pages to fix this week and tracks the counts over time.</p>
+    </div>
+
+    <div class="dropzone" id="dz-audit">
+      <strong>Drop GSC Pages CSV here</strong> or
+      <div class="row">
+        <label class="filebtn" for="file-audit">Choose file</label>
+        <input type="file" id="file-audit" class="hidden-input" accept=".csv" />
+        <span class="small">CRITICAL = 500+ impressions &amp; 0 clicks · HIGH = 200+ impressions &amp; CTR &lt; 1% · OPPORTUNITY = position 4&ndash;10</span>
+      </div>
+    </div>
+
+    <div id="audit-summary"></div>
+    <div id="audit-table"></div>
+
+    <div class="panel">
+      <h3>Trend over time</h3>
+      <div id="audit-trend"></div>
+    </div>
+  </section>
+
+  <!-- ========== TAB 2: INTERNAL LINKING ========== -->
+  <section class="tab" id="tab-linking">
+    <div class="tab-intro">
+      <h2>Internal Linking</h2>
+      <p>Find articles with no inbound internal links. Upload the GSC Pages CSV to load your page list, then mark which page links to which. Inbound counts and orphaned pages update automatically.</p>
+    </div>
+
+    <span class="tag-warn">Manual tracking — update when you add new internal links. Full automated crawling requires a backend.</span>
+
+    <div class="dropzone" id="dz-linking">
+      <strong>Drop GSC Pages CSV here</strong> or
+      <div class="row">
+        <label class="filebtn" for="file-linking">Choose file</label>
+        <input type="file" id="file-linking" class="hidden-input" accept=".csv" />
+        <button id="linking-from-audit" type="button">Reuse pages from Content Audit</button>
+      </div>
+    </div>
+
+    <div id="linking-orphan-summary"></div>
+
+    <div class="panel">
+      <h3>Inbound links per page</h3>
+      <div id="linking-table"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Link matrix <span class="muted small">— check a box if the row page links to the column page</span></h3>
+      <div id="linking-matrix"></div>
+    </div>
+  </section>
+
+  <!-- ========== TAB 3: CONTENT GAPS ========== -->
+  <section class="tab" id="tab-gaps">
+    <div class="tab-intro">
+      <h2>Content Gaps</h2>
+      <p>Upload your GSC <strong>Queries</strong> CSV (columns: Top queries, Clicks, Impressions, CTR, Position). Surfaces queries Google thinks you are relevant for but where you are not ranking or not converting.</p>
+    </div>
+
+    <div class="dropzone" id="dz-gaps">
+      <strong>Drop GSC Queries CSV here</strong> or
+      <div class="row">
+        <label class="filebtn" for="file-gaps">Choose file</label>
+        <input type="file" id="file-gaps" class="hidden-input" accept=".csv" />
+        <span class="small">Poor ranking = 10+ impressions &amp; position &gt; 20 · No clicks = 10+ impressions &amp; 0 clicks</span>
+      </div>
+    </div>
+
+    <div id="gaps-summary"></div>
+    <div id="gaps-table"></div>
+
+    <div class="panel">
+      <h3>Query clusters <span class="muted small">— grouped by shared root keyword</span></h3>
+      <div id="gaps-clusters"></div>
+    </div>
+  </section>
+
+  <!-- ========== TAB 4: PROGRESS ========== -->
+  <section class="tab" id="tab-progress">
+    <div class="tab-intro">
+      <h2>Progress</h2>
+      <p>Historical trends across all tools, a week-over-week score, and a manual notes log. Export everything as CSV for backup.</p>
+    </div>
+
+    <div id="progress-score"></div>
+
+    <div class="panel">
+      <h3>Content audit timeline</h3>
+      <div id="progress-timeline"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Notes log</h3>
+      <div class="row-flex mb8">
+        <input type="text" id="note-input" placeholder="e.g. Week of May 27 — fixed storage fees meta description, submitted to GSC" />
+        <button id="note-add" class="primary" type="button">Add note</button>
+      </div>
+      <div id="notes-list"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Backup</h3>
+      <div class="row-flex">
+        <button id="export-csv" type="button">Export all history as CSV</button>
+        <button id="export-json-2" type="button">Export all data (JSON)</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/*
+  SEO CONTENT INTELLIGENCE DASHBOARD
+  Template by WhiskeyBarrel.com
+
+  TO USE FOR A NEW SITE:
+  1. Update the SITE_CONFIG block below
+  2. Change primaryColor to match your brand
+  3. Open in any browser or Claude Cowork
+  4. Upload your GSC CSV exports to get started
+
+  DATA STORAGE: All data saved in browser localStorage
+  Export your data regularly using the Export button in Tab 4
+*/
+
+const SITE_CONFIG = {
+  name: "WhiskeyBarrel.com",
+  url: "https://whiskeybarrel.com",
+  sitemap: "https://whiskeybarrel.com/sitemap.xml",
+  primaryColor: "#C4922A",
+  darkBg: "#111111"
+};
+
+/* ============================================================
+   SETUP & STATE
+   ============================================================ */
+document.documentElement.style.setProperty('--accent', SITE_CONFIG.primaryColor);
+document.documentElement.style.setProperty('--bg', SITE_CONFIG.darkBg);
+document.getElementById('siteName').textContent = SITE_CONFIG.name + " — SEO Intelligence";
+document.getElementById('siteUrl').textContent = SITE_CONFIG.url;
+document.title = SITE_CONFIG.name + " — SEO Dashboard";
+
+const NS = 'seoDash:' + SITE_CONFIG.name;
+
+function defaultState() {
+  return {
+    auditHistory: [],   // {date, critical, high, opportunity, totalImpressions, totalClicks}
+    lastAudit: [],      // [{url, clicks, impressions, ctr, position, flag}]
+    links: {},          // { sourceUrl: [targetUrl, ...] }
+    pages: [],          // [url, ...] for linking tab
+    lastQueries: [],    // [{query, clicks, impressions, ctr, position}]
+    gapHistory: [],     // {date, gaps:[{query, impressions, position, type}]}
+    notes: []           // {date, text}
+  };
+}
+
+let STATE = loadState();
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(NS);
+    return raw ? Object.assign(defaultState(), JSON.parse(raw)) : defaultState();
+  } catch (e) {
+    console.warn('localStorage unavailable:', e);
+    return defaultState();
+  }
+}
+function saveState() {
+  try { localStorage.setItem(NS, JSON.stringify(STATE)); }
+  catch (e) { console.warn('Could not save state:', e); }
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+
+function num(s) {
+  if (s == null) return 0;
+  const v = parseFloat(String(s).replace(/[, %]/g, ''));
+  return isNaN(v) ? 0 : v;
+}
+function parseCTR(s) {
+  if (s == null) return 0;
+  const t = String(s).trim();
+  const pct = t.includes('%');
+  let v = parseFloat(t.replace(/[, %]/g, ''));
+  if (isNaN(v)) return 0;
+  if (!pct && v <= 1) v = v * 100; // fraction -> percent
+  return v;
+}
+function fmtInt(n) { return Math.round(n).toLocaleString(); }
+function fmtCTR(n) { return n.toFixed(2) + '%'; }
+function fmtPos(n) { return n ? n.toFixed(1) : '—'; }
+function shortUrl(u) {
+  let s = String(u || '');
+  s = s.replace(/^https?:\/\/[^/]+/i, '');
+  return s.length ? s : (u || '');
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ---- CSV parser (handles quotes, escaped quotes, CRLF, BOM) ---- */
+function parseCSV(text) {
+  text = String(text).replace(/^﻿/, '');
+  const rows = [];
+  let cur = [], field = '', inQ = false, i = 0;
+  while (i < text.length) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i += 2; continue; }
+        inQ = false; i++; continue;
+      }
+      field += c; i++; continue;
+    }
+    if (c === '"') { inQ = true; i++; continue; }
+    if (c === ',') { cur.push(field); field = ''; i++; continue; }
+    if (c === '\r') { i++; continue; }
+    if (c === '\n') { cur.push(field); rows.push(cur); cur = []; field = ''; i++; continue; }
+    field += c; i++;
+  }
+  if (field.length || cur.length) { cur.push(field); rows.push(cur); }
+  return rows.filter(r => r.length && !(r.length === 1 && r[0].trim() === ''));
+}
+
+function mapColumns(headers) {
+  const h = headers.map(x => String(x).trim().toLowerCase());
+  const find = (...keys) => {
+    for (let k = 0; k < h.length; k++) {
+      if (keys.some(key => h[k].includes(key))) return k;
+    }
+    return -1;
+  };
+  return {
+    page: find('top pages', 'page', 'url', 'address', 'landing'),
+    query: find('top queries', 'query', 'queries', 'keyword', 'search term'),
+    clicks: find('click'),
+    impressions: find('impression'),
+    ctr: find('ctr'),
+    position: find('position', 'avg. pos', 'average position')
+  };
+}
+
+function readFile(file, cb) {
+  const reader = new FileReader();
+  reader.onload = e => cb(e.target.result);
+  reader.readAsText(file);
+}
+
+/* ---- generic sortable table ---- */
+const sortState = {
+  audit: { key: 'impressions', dir: 'desc' },
+  linking: { key: 'inbound', dir: 'asc' },
+  gaps: { key: 'impressions', dir: 'desc' }
+};
+
+function sortRows(rows, key, dir, type) {
+  const mult = dir === 'asc' ? 1 : -1;
+  return rows.slice().sort((a, b) => {
+    let av = a[key], bv = b[key];
+    if (type === 'string') {
+      return mult * String(av).localeCompare(String(bv));
+    }
+    av = +av || 0; bv = +bv || 0;
+    return mult * (av - bv);
+  });
+}
+
+// cols: [{key,label,type,cls,render}]
+function renderTable(containerId, cols, rows, group, emptyMsg) {
+  const el = document.getElementById(containerId);
+  if (!rows.length) { el.innerHTML = '<div class="empty">' + (emptyMsg || 'No data yet.') + '</div>'; return; }
+  const st = sortState[group];
+  const sorted = sortRows(rows, st.key, st.dir, (cols.find(c => c.key === st.key) || {}).type);
+  let html = '<div class="table-wrap"><table><thead><tr>';
+  cols.forEach(c => {
+    const arrow = st.key === c.key ? '<span class="arrow">' + (st.dir === 'asc' ? '▲' : '▼') + '</span>' : '';
+    html += '<th data-key="' + c.key + '" data-type="' + (c.type || 'number') + '">' + c.label + arrow + '</th>';
+  });
+  html += '</tr></thead><tbody>';
+  sorted.forEach(r => {
+    html += '<tr>';
+    cols.forEach(c => {
+      const cls = c.cls || (c.type === 'string' ? '' : 'num');
+      const val = c.render ? c.render(r) : escapeHtml(r[c.key]);
+      html += '<td class="' + cls + '">' + val + '</td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  el.innerHTML = html;
+  el.querySelectorAll('th[data-key]').forEach(th => {
+    th.addEventListener('click', () => {
+      const k = th.getAttribute('data-key');
+      if (st.key === k) { st.dir = st.dir === 'asc' ? 'desc' : 'asc'; }
+      else { st.key = k; st.dir = th.getAttribute('data-type') === 'string' ? 'asc' : 'desc'; }
+      renderTable(containerId, cols, rows, group, emptyMsg);
+    });
+  });
+}
+
+/* ---- multi-line chart (SVG) ---- */
+function lineChart(history, opts) {
+  opts = opts || {};
+  const h = history || [];
+  if (!h.length) return '<div class="empty">No history yet — upload a CSV to start tracking.</div>';
+  const W = opts.w || 720, H = opts.h || 220;
+  const pad = { l: 36, r: 14, t: 14, b: 30 };
+  const series = [
+    { key: 'critical', color: 'var(--critical)', label: 'Critical' },
+    { key: 'high', color: 'var(--high)', label: 'High priority' },
+    { key: 'opportunity', color: 'var(--opportunity)', label: 'Opportunity' }
+  ];
+  const max = Math.max(1, ...h.flatMap(d => series.map(s => +d[s.key] || 0)));
+  const plotW = W - pad.l - pad.r, plotH = H - pad.t - pad.b;
+  const n = h.length;
+  const xOf = i => pad.l + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+  const yOf = v => pad.t + plotH - (plotH * v) / max;
+
+  let svg = '<svg class="chart-svg" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet">';
+  // gridlines
+  for (let g = 0; g <= 4; g++) {
+    const y = pad.t + (plotH * g) / 4;
+    const v = Math.round(max - (max * g) / 4);
+    svg += '<line x1="' + pad.l + '" y1="' + y + '" x2="' + (W - pad.r) + '" y2="' + y + '" stroke="#2a2a2a" stroke-width="1"/>';
+    svg += '<text x="' + (pad.l - 6) + '" y="' + (y + 3) + '" fill="#8c857c" font-size="10" text-anchor="end">' + v + '</text>';
+  }
+  // date labels (sparse)
+  const step = Math.ceil(n / 6);
+  h.forEach((d, i) => {
+    if (i % step === 0 || i === n - 1) {
+      svg += '<text x="' + xOf(i) + '" y="' + (H - 10) + '" fill="#8c857c" font-size="9" text-anchor="middle">' + d.date.slice(5) + '</text>';
+    }
+  });
+  // lines + points
+  series.forEach(s => {
+    const pts = h.map((d, i) => xOf(i) + ',' + yOf(+d[s.key] || 0)).join(' ');
+    if (n > 1) svg += '<polyline points="' + pts + '" fill="none" stroke="' + s.color + '" stroke-width="2"/>';
+    h.forEach((d, i) => {
+      svg += '<circle cx="' + xOf(i) + '" cy="' + yOf(+d[s.key] || 0) + '" r="3" fill="' + s.color + '"/>';
+    });
+  });
+  svg += '</svg>';
+  let legend = '<div class="legend">';
+  series.forEach(s => { legend += '<span><i style="background:' + s.color + '"></i>' + s.label + '</span>'; });
+  legend += '</div>';
+  return svg + legend;
+}
+
+/* ============================================================
+   TAB 1 — CONTENT AUDIT
+   ============================================================ */
+function flagOf(r) {
+  if (r.impressions >= 500 && r.clicks === 0) return 'critical';
+  if (r.impressions >= 200 && r.ctr < 1) return 'high';
+  if (r.position >= 4 && r.position <= 10) return 'opportunity';
+  return null;
+}
+
+function ingestAudit(text) {
+  const rows = parseCSV(text);
+  if (rows.length < 2) { alert('Could not read any data rows from that CSV.'); return; }
+  const cols = mapColumns(rows[0]);
+  if (cols.page === -1) { alert('Could not find a "Top pages" / URL column in this CSV.'); return; }
+  const data = [];
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    const url = (r[cols.page] || '').trim();
+    if (!url) continue;
+    const rec = {
+      url,
+      clicks: num(r[cols.clicks]),
+      impressions: num(r[cols.impressions]),
+      ctr: parseCTR(r[cols.ctr]),
+      position: num(r[cols.position])
+    };
+    rec.flag = flagOf(rec);
+    data.push(rec);
+  }
+  STATE.lastAudit = data;
+
+  const counts = { critical: 0, high: 0, opportunity: 0 };
+  let totalImpressions = 0, totalClicks = 0;
+  data.forEach(r => {
+    if (r.flag) counts[r.flag]++;
+    totalImpressions += r.impressions;
+    totalClicks += r.clicks;
+  });
+
+  const entry = { date: todayStr(), critical: counts.critical, high: counts.high, opportunity: counts.opportunity, totalImpressions, totalClicks };
+  STATE.auditHistory = STATE.auditHistory.filter(e => e.date !== entry.date);
+  STATE.auditHistory.push(entry);
+  STATE.auditHistory.sort((a, b) => a.date.localeCompare(b.date));
+
+  saveState();
+  renderAudit();
+  renderProgress();
+}
+
+function renderAudit() {
+  const data = STATE.lastAudit || [];
+  const flagged = data.filter(r => r.flag);
+  const counts = { critical: 0, high: 0, opportunity: 0 };
+  flagged.forEach(r => counts[r.flag]++);
+
+  document.getElementById('audit-summary').innerHTML = data.length ? (
+    '<div class="summary-cards">' +
+    '<div class="card critical"><div class="label">Critical</div><div class="value">' + counts.critical + '</div><div class="small muted">500+ impr, 0 clicks</div></div>' +
+    '<div class="card high"><div class="label">High priority</div><div class="value">' + counts.high + '</div><div class="small muted">200+ impr, CTR &lt; 1%</div></div>' +
+    '<div class="card opportunity"><div class="label">Opportunity</div><div class="value">' + counts.opportunity + '</div><div class="small muted">position 4&ndash;10</div></div>' +
+    '<div class="card"><div class="label">Pages analyzed</div><div class="value">' + data.length + '</div><div class="small muted">' + fmtInt(data.reduce((s, r) => s + r.impressions, 0)) + ' impr total</div></div>' +
+    '</div>'
+  ) : '';
+
+  const cols = [
+    { key: 'flag', label: 'Flag', type: 'string', render: r => '<span class="badge ' + r.flag + '">' + (r.flag === 'high' ? 'High' : r.flag === 'opportunity' ? 'Opportunity' : 'Critical') + '</span>' },
+    { key: 'url', label: 'URL', type: 'string', cls: 'url', render: r => '<a href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">' + escapeHtml(shortUrl(r.url)) + '</a>' },
+    { key: 'impressions', label: 'Impressions', render: r => fmtInt(r.impressions) },
+    { key: 'clicks', label: 'Clicks', render: r => fmtInt(r.clicks) },
+    { key: 'ctr', label: 'CTR', render: r => fmtCTR(r.ctr) },
+    { key: 'position', label: 'Position', render: r => fmtPos(r.position) }
+  ];
+  renderTable('audit-table', cols, flagged, 'audit', data.length ? 'No pages flagged — nice work.' : 'Upload a GSC Pages CSV to begin.');
+
+  document.getElementById('audit-trend').innerHTML = lineChart(STATE.auditHistory);
+}
+
+/* ============================================================
+   TAB 2 — INTERNAL LINKING
+   ============================================================ */
+function ingestLinkingPages(text) {
+  const rows = parseCSV(text);
+  if (rows.length < 2) { alert('Could not read any data rows from that CSV.'); return; }
+  const cols = mapColumns(rows[0]);
+  if (cols.page === -1) { alert('Could not find a "Top pages" / URL column in this CSV.'); return; }
+  const pages = [];
+  for (let i = 1; i < rows.length; i++) {
+    const url = (rows[i][cols.page] || '').trim();
+    if (url && !pages.includes(url)) pages.push(url);
+  }
+  STATE.pages = pages;
+  saveState();
+  renderLinking();
+}
+
+function inboundCounts() {
+  const counts = {};
+  STATE.pages.forEach(p => counts[p] = 0);
+  Object.keys(STATE.links).forEach(src => {
+    (STATE.links[src] || []).forEach(tgt => {
+      if (tgt !== src && counts.hasOwnProperty(tgt)) counts[tgt]++;
+    });
+  });
+  return counts;
+}
+
+function toggleLink(src, tgt, on) {
+  if (!STATE.links[src]) STATE.links[src] = [];
+  const arr = STATE.links[src];
+  const idx = arr.indexOf(tgt);
+  if (on && idx === -1) arr.push(tgt);
+  if (!on && idx !== -1) arr.splice(idx, 1);
+  saveState();
+  renderLinkingSummary(); // update counts without rebuilding whole matrix
+}
+
+function renderLinkingSummary() {
+  const pages = STATE.pages || [];
+  const counts = inboundCounts();
+  const orphans = pages.filter(p => counts[p] === 0);
+
+  document.getElementById('linking-orphan-summary').innerHTML = pages.length ? (
+    '<div class="summary-cards">' +
+    '<div class="card"><div class="label">Pages tracked</div><div class="value">' + pages.length + '</div></div>' +
+    '<div class="card critical"><div class="label">Orphaned</div><div class="value">' + orphans.length + '</div><div class="small muted">0 inbound links</div></div>' +
+    '<div class="card"><div class="label">Links recorded</div><div class="value">' + Object.values(STATE.links).reduce((s, a) => s + (a ? a.length : 0), 0) + '</div></div>' +
+    '</div>'
+  ) : '';
+
+  const rows = pages.map(p => ({ url: p, inbound: counts[p], status: counts[p] === 0 ? 'orphaned' : 'ok' }));
+  const cols = [
+    { key: 'url', label: 'Page', type: 'string', cls: 'url', render: r => escapeHtml(shortUrl(r.url)) },
+    { key: 'inbound', label: 'Inbound links', render: r => r.inbound },
+    { key: 'status', label: 'Status', type: 'string', render: r => '<span class="badge ' + (r.inbound === 0 ? 'orphaned' : 'ok') + '">' + (r.inbound === 0 ? 'Orphaned' : 'Linked') + '</span>' }
+  ];
+  renderTable('linking-table', cols, rows, 'linking', 'Upload a GSC Pages CSV to load your page list.');
+}
+
+function renderLinking() {
+  renderLinkingSummary();
+  const pages = STATE.pages || [];
+  const mEl = document.getElementById('linking-matrix');
+  if (!pages.length) { mEl.innerHTML = '<div class="empty">Upload a GSC Pages CSV (or reuse audit pages) to build the link matrix.</div>'; return; }
+
+  let html = '<div class="matrix-wrap"><table class="matrix"><thead><tr><th class="corner">links to &rarr;</th>';
+  pages.forEach(p => { html += '<th title="' + escapeHtml(p) + '"><div class="colhead">' + escapeHtml(shortUrl(p)) + '</div></th>'; });
+  html += '</tr></thead><tbody>';
+  pages.forEach(src => {
+    html += '<tr><th title="' + escapeHtml(src) + '">' + escapeHtml(shortUrl(src)) + '</th>';
+    pages.forEach(tgt => {
+      if (src === tgt) { html += '<td style="opacity:.25">·</td>'; return; }
+      const checked = (STATE.links[src] || []).indexOf(tgt) !== -1 ? ' checked' : '';
+      html += '<td><input type="checkbox" data-src="' + escapeHtml(src) + '" data-tgt="' + escapeHtml(tgt) + '"' + checked + '></td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  mEl.innerHTML = html;
+  mEl.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    cb.addEventListener('change', () => toggleLink(cb.getAttribute('data-src'), cb.getAttribute('data-tgt'), cb.checked));
+  });
+}
+
+/* ============================================================
+   TAB 3 — CONTENT GAPS
+   ============================================================ */
+const STOPWORDS = new Set(['the','a','an','and','or','for','to','of','in','on','is','are','best','how','what','why','vs','my','your','you','with','do','does','can','i','it','at','by','this','that','from','should','will','be','if','when','which','as','about','vs.','&']);
+
+function rootWord(q) {
+  const tokens = String(q).toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(t => t && !STOPWORDS.has(t));
+  if (!tokens.length) return '(misc)';
+  return tokens.slice().sort((a, b) => b.length - a.length)[0];
+}
+
+function ingestGaps(text) {
+  const rows = parseCSV(text);
+  if (rows.length < 2) { alert('Could not read any data rows from that CSV.'); return; }
+  const cols = mapColumns(rows[0]);
+  if (cols.query === -1) { alert('Could not find a "Top queries" / query column in this CSV.'); return; }
+  const data = [];
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    const q = (r[cols.query] || '').trim();
+    if (!q) continue;
+    data.push({
+      query: q,
+      clicks: num(r[cols.clicks]),
+      impressions: num(r[cols.impressions]),
+      ctr: parseCTR(r[cols.ctr]),
+      position: num(r[cols.position])
+    });
+  }
+  STATE.lastQueries = data;
+
+  const gaps = computeGaps(data);
+  const top10 = gaps.slice().sort((a, b) => b.impressions - a.impressions).slice(0, 10)
+    .map(g => ({ query: g.query, impressions: g.impressions, position: g.position, type: g.type }));
+  const entry = { date: todayStr(), gaps: top10 };
+  STATE.gapHistory = STATE.gapHistory.filter(e => e.date !== entry.date);
+  STATE.gapHistory.push(entry);
+  STATE.gapHistory.sort((a, b) => a.date.localeCompare(b.date));
+
+  saveState();
+  renderGaps();
+}
+
+function computeGaps(data) {
+  const out = [];
+  data.forEach(r => {
+    const types = [];
+    if (r.impressions >= 10 && r.position > 20) types.push('poor');
+    if (r.impressions >= 10 && r.clicks === 0) types.push('noclick');
+    if (types.length) {
+      out.push(Object.assign({}, r, { type: types.join('+'), group: rootWord(r.query) }));
+    }
+  });
+  return out;
+}
+
+function renderGaps() {
+  const data = STATE.lastQueries || [];
+  const gaps = computeGaps(data);
+  const poor = gaps.filter(g => g.type.includes('poor')).length;
+  const noclick = gaps.filter(g => g.type.includes('noclick')).length;
+
+  document.getElementById('gaps-summary').innerHTML = data.length ? (
+    '<div class="summary-cards">' +
+    '<div class="card high"><div class="label">Poor ranking</div><div class="value">' + poor + '</div><div class="small muted">10+ impr, pos &gt; 20</div></div>' +
+    '<div class="card opportunity"><div class="label">No clicks</div><div class="value">' + noclick + '</div><div class="small muted">10+ impr, 0 clicks</div></div>' +
+    '<div class="card"><div class="label">Queries analyzed</div><div class="value">' + data.length + '</div></div>' +
+    '</div>'
+  ) : '';
+
+  const typeBadge = t => {
+    let s = '';
+    if (t.includes('poor')) s += '<span class="badge poor">Poor rank</span> ';
+    if (t.includes('noclick')) s += '<span class="badge noclick">No clicks</span>';
+    return s;
+  };
+  const cols = [
+    { key: 'query', label: 'Query', type: 'string', cls: 'url', render: g => escapeHtml(g.query) },
+    { key: 'impressions', label: 'Impressions', render: g => fmtInt(g.impressions) },
+    { key: 'clicks', label: 'Clicks', render: g => fmtInt(g.clicks) },
+    { key: 'ctr', label: 'CTR', render: g => fmtCTR(g.ctr) },
+    { key: 'position', label: 'Position', render: g => fmtPos(g.position) },
+    { key: 'type', label: 'Gap type', type: 'string', render: g => typeBadge(g.type) },
+    { key: 'group', label: 'Cluster', type: 'string', render: g => escapeHtml(g.group) }
+  ];
+  renderTable('gaps-table', cols, gaps, 'gaps', data.length ? 'No content gaps found in this export.' : 'Upload a GSC Queries CSV to begin.');
+
+  // clusters
+  const clEl = document.getElementById('gaps-clusters');
+  if (!gaps.length) { clEl.innerHTML = '<div class="empty">No clusters yet.</div>'; return; }
+  const groups = {};
+  gaps.forEach(g => {
+    if (!groups[g.group]) groups[g.group] = { group: g.group, count: 0, impressions: 0, queries: [] };
+    groups[g.group].count++;
+    groups[g.group].impressions += g.impressions;
+    groups[g.group].queries.push(g.query);
+  });
+  const arr = Object.values(groups).sort((a, b) => b.impressions - a.impressions);
+  let html = '<div class="table-wrap"><table><thead><tr><th>Root keyword</th><th>Queries</th><th class="num">Total impressions</th><th>Example queries</th></tr></thead><tbody>';
+  arr.forEach(g => {
+    html += '<tr><td><strong>' + escapeHtml(g.group) + '</strong></td><td class="num">' + g.count + '</td><td class="num">' + fmtInt(g.impressions) + '</td><td class="small muted">' + escapeHtml(g.queries.slice(0, 4).join(' · ')) + (g.queries.length > 4 ? ' …' : '') + '</td></tr>';
+  });
+  html += '</tbody></table></div>';
+  clEl.innerHTML = html;
+}
+
+/* ============================================================
+   TAB 4 — PROGRESS
+   ============================================================ */
+function renderProgress() {
+  const hist = STATE.auditHistory || [];
+
+  // score: last two entries
+  let scoreHtml = '';
+  if (hist.length >= 1) {
+    const cur = hist[hist.length - 1];
+    const prev = hist.length >= 2 ? hist[hist.length - 2] : null;
+    const deltaCard = (label, curV, prevV) => {
+      let d = '';
+      if (prev) {
+        const diff = curV - prevV;
+        const pct = prevV ? ((diff / prevV) * 100).toFixed(1) : '—';
+        const dir = diff >= 0 ? 'up' : 'down';
+        const sign = diff >= 0 ? '+' : '';
+        d = '<div class="delta ' + dir + '">' + sign + fmtInt(diff) + (prevV ? ' (' + sign + pct + '%)' : '') + ' vs last upload</div>';
+      } else {
+        d = '<div class="small muted">No prior upload to compare</div>';
+      }
+      return '<div class="card"><div class="label">' + label + '</div><div class="value">' + fmtInt(curV) + '</div>' + d + '</div>';
+    };
+    scoreHtml = '<div class="summary-cards">' +
+      deltaCard('Impressions this week', cur.totalImpressions, prev ? prev.totalImpressions : 0) +
+      deltaCard('Clicks this week', cur.totalClicks, prev ? prev.totalClicks : 0) +
+      '<div class="card"><div class="label">Snapshots recorded</div><div class="value">' + hist.length + '</div><div class="small muted">latest: ' + cur.date + '</div></div>' +
+      '</div>';
+  } else {
+    scoreHtml = '<div class="empty">Upload a Content Audit CSV to start tracking your week-over-week score.</div>';
+  }
+  document.getElementById('progress-score').innerHTML = scoreHtml;
+
+  document.getElementById('progress-timeline').innerHTML = lineChart(hist, { w: 860, h: 260 });
+
+  renderNotes();
+}
+
+function renderNotes() {
+  const el = document.getElementById('notes-list');
+  const notes = (STATE.notes || []).slice().sort((a, b) => b.date.localeCompare(a.date));
+  if (!notes.length) { el.innerHTML = '<div class="empty">No notes yet.</div>'; return; }
+  el.innerHTML = notes.map((n, idx) =>
+    '<div class="note-item"><span class="date">' + escapeHtml(n.date) + '</span><span class="text">' + escapeHtml(n.text) + '</span><button data-note="' + escapeHtml(n.date + '|' + n.text) + '">Delete</button></div>'
+  ).join('');
+  el.querySelectorAll('button[data-note]').forEach(b => {
+    b.addEventListener('click', () => {
+      const key = b.getAttribute('data-note');
+      STATE.notes = STATE.notes.filter(n => (n.date + '|' + n.text) !== key);
+      saveState(); renderNotes();
+    });
+  });
+}
+
+/* ============================================================
+   EXPORT / IMPORT / CLEAR
+   ============================================================ */
+function downloadFile(filename, content, type) {
+  const blob = new Blob([content], { type: type || 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function exportAllJSON() {
+  const payload = { site: SITE_CONFIG.name, exported: new Date().toISOString(), state: STATE };
+  downloadFile('seo-dashboard-' + SITE_CONFIG.name.replace(/[^a-z0-9]/gi, '-') + '-' + todayStr() + '.json',
+    JSON.stringify(payload, null, 2), 'application/json');
+}
+
+function csvCell(v) {
+  const s = String(v == null ? '' : v);
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
+function exportAllCSV() {
+  const lines = [];
+  lines.push('SECTION,date,critical,high_priority,opportunity,total_impressions,total_clicks');
+  (STATE.auditHistory || []).forEach(e =>
+    lines.push(['AUDIT_HISTORY', e.date, e.critical, e.high, e.opportunity, e.totalImpressions, e.totalClicks].map(csvCell).join(',')));
+  lines.push('');
+  lines.push('SECTION,date,query,impressions,position,type');
+  (STATE.gapHistory || []).forEach(snap =>
+    (snap.gaps || []).forEach(g =>
+      lines.push(['GAP_HISTORY', snap.date, g.query, g.impressions, g.position, g.type].map(csvCell).join(','))));
+  lines.push('');
+  lines.push('SECTION,date,note');
+  (STATE.notes || []).forEach(n =>
+    lines.push(['NOTE', n.date, n.text].map(csvCell).join(',')));
+  lines.push('');
+  lines.push('SECTION,source,target');
+  Object.keys(STATE.links || {}).forEach(src =>
+    (STATE.links[src] || []).forEach(t =>
+      lines.push(['LINK', src, t].map(csvCell).join(','))));
+  downloadFile('seo-dashboard-history-' + todayStr() + '.csv', lines.join('\n'), 'text/csv');
+}
+
+function importJSON(text) {
+  try {
+    const obj = JSON.parse(text);
+    const incoming = obj.state ? obj.state : obj;
+    STATE = Object.assign(defaultState(), incoming);
+    saveState();
+    renderAll();
+    alert('Data imported successfully.');
+  } catch (e) {
+    alert('Could not parse that JSON file.');
+  }
+}
+
+function clearAll() {
+  if (!confirm('Clear ALL stored data for ' + SITE_CONFIG.name + '? This cannot be undone. Export a backup first if needed.')) return;
+  STATE = defaultState();
+  saveState();
+  renderAll();
+}
+
+/* ============================================================
+   WIRING
+   ============================================================ */
+function setupDropzone(zoneId, inputId, handler) {
+  const zone = document.getElementById(zoneId);
+  const input = document.getElementById(inputId);
+  input.addEventListener('change', () => { if (input.files[0]) readFile(input.files[0], handler); input.value = ''; });
+  ['dragenter', 'dragover'].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.remove('drag'); }));
+  zone.addEventListener('drop', e => {
+    const f = e.dataTransfer.files[0];
+    if (f) readFile(f, handler);
+  });
+}
+
+setupDropzone('dz-audit', 'file-audit', ingestAudit);
+setupDropzone('dz-linking', 'file-linking', ingestLinkingPages);
+setupDropzone('dz-gaps', 'file-gaps', ingestGaps);
+
+document.getElementById('linking-from-audit').addEventListener('click', () => {
+  const urls = (STATE.lastAudit || []).map(r => r.url);
+  if (!urls.length) { alert('No Content Audit pages loaded yet. Upload a CSV in the Content Audit tab first.'); return; }
+  STATE.pages = urls.filter((u, i) => urls.indexOf(u) === i);
+  saveState();
+  renderLinking();
+});
+
+document.getElementById('note-add').addEventListener('click', () => {
+  const inp = document.getElementById('note-input');
+  const text = inp.value.trim();
+  if (!text) return;
+  STATE.notes.push({ date: todayStr(), text });
+  saveState(); inp.value = ''; renderNotes();
+});
+document.getElementById('note-input').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('note-add').click(); });
+
+document.getElementById('exportAllBtn').addEventListener('click', exportAllJSON);
+document.getElementById('export-json-2').addEventListener('click', exportAllJSON);
+document.getElementById('export-csv').addEventListener('click', exportAllCSV);
+document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+document.getElementById('importAllInput').addEventListener('change', e => {
+  if (e.target.files[0]) readFile(e.target.files[0], importJSON);
+  e.target.value = '';
+});
+
+// tabs
+document.querySelectorAll('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.getAttribute('data-tab')).classList.add('active');
+  });
+});
+
+function renderAll() {
+  renderAudit();
+  renderLinking();
+  renderGaps();
+  renderProgress();
+}
+
+renderAll();
+</script>
+</body>
+</html>
