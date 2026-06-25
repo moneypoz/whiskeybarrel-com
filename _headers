@@ -3,9 +3,18 @@
 #
 # CSP must stay on ONE physical line (no wrapping). Keep origins in sync with
 # whatever third-party scripts/fetches the HTML actually uses.
+#
+# script-src uses sha256 HASHES of our inline <script> blocks instead of
+# 'unsafe-inline' (which the Mozilla Observatory penalises -20). If you EDIT
+# any inline <script> in the HTML, its hash changes and that page's script
+# will be blocked until you regenerate the list. To regenerate, run:
+#   node scripts/csp-hashes.mjs
+# and paste the printed hashes into script-src below.
+# (style-src keeps 'unsafe-inline' because the large inline <style> blocks are
+#  impractical to hash and Observatory does not penalise inline styles.)
 
 /*
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://magic.beehiiv.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://*.clarity.ms https://static.getclicky.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://*.getclicky.com https://magic.beehiiv.com; frame-src https://*.clarity.ms; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://magic.beehiiv.com; script-src 'self' 'sha256-/WD49VQ+7IZiOFb/WAY00tedsSVnT1prOjRcX1HYDBE=' 'sha256-JKKrLuqPB94bcqFsuTMKrek9FKnzSwzXMYq/AIBsl6A=' 'sha256-rS8yGpCBV0aDC2NKDzoz13gfDYXM6cblSHXPTPo1NrI=' 'sha256-chuohdUadnURRPR/174f7gx/a5nNWKJBIENs8IvbUB0=' 'sha256-nX9zvOWzRcJ7rTvsT8S3DeG5Tmf0I7W0wj83h40h+QY=' 'sha256-Tn3GpCmxRiGXX730Npo5b2KoZPdMjWG5qnb15ZgyE+E=' 'sha256-UHr0QsJtF+8JmHP1yqg/oPivyFuYKFnflXXgMN/T06w=' 'sha256-A06HVWoOSlrQgLDw79NriQs0OS7PtQmXz4YPd4pPvOM=' 'sha256-Iyjoazs24ofRU/y+Y5AZSYKzynGfR5HxAn8G/9HORX4=' 'sha256-FhtyXACYM+CX7gUTcF6WKc6CwzuujycEelJtpZtV4Ac=' https://www.googletagmanager.com https://www.clarity.ms https://*.clarity.ms https://static.getclicky.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://*.getclicky.com https://magic.beehiiv.com; frame-src https://*.clarity.ms; upgrade-insecure-requests
   Strict-Transport-Security: max-age=2592000
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
