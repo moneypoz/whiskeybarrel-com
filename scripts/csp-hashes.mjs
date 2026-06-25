@@ -27,7 +27,10 @@ for (const f of files) {
     if (/\bsrc\s*=/.test(attrs)) continue;                              // external script
     if (/type\s*=\s*["']application\/ld\+json/i.test(attrs)) continue;  // JSON-LD data, not executed
     if (body.trim() === '') continue;
-    const h = 'sha256-' + createHash('sha256').update(body, 'utf8').digest('base64');
+    // Normalise CRLF -> LF: git (core.autocrlf) stores LF and the host serves
+    // LF, so the browser hashes LF regardless of the local working-copy EOL.
+    const normalised = body.replace(/\r\n/g, '\n');
+    const h = 'sha256-' + createHash('sha256').update(normalised, 'utf8').digest('base64');
     if (!hashes.has(h)) hashes.set(h, new Set());
     hashes.get(h).add(f);
   }
