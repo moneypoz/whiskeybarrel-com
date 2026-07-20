@@ -1,4 +1,6 @@
-https://www.whiskeybarrel.com/* https://whiskeybarrel.com/:splat 301
+# www -> apex 301 is handled by a Cloudflare Redirect Rule (dashboard > Rules > Overview),
+# NOT here. Cloudflare Pages _redirects only supports path-based sources; absolute-URL
+# sources are silently ignored. Do not re-add a https://www... rule here.
 
 /invest/10-whiskey-distilleries-serious-investors-watch/index.html /invest/10-whiskey-distilleries-serious-investors-watch/ 301
 /invest/before-you-wire-money-to-a-whiskey-cask-broker-read-this/index.html /invest/before-you-wire-money-to-a-whiskey-cask-broker-read-this/ 301
