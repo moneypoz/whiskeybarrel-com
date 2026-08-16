@@ -1,12 +1,12 @@
 # Article source Markdown.
 #
-# These live in the repo root for authoring convenience, but the repo root IS
-# the Cloudflare Pages publish root: anything committed here is served. A
-# committed article source would be reachable at /<slug>.md and would be a
-# full duplicate of the published article, which Google can index and treat
-# as competing content.
+# The published HTML under /invest/ is the single source of truth for article
+# copy. There are no separate .md sources to keep in sync, so nothing can drift
+# out of step with what is deployed.
 #
-# Keeping them untracked means they never reach Cloudflare (Pages deploys the
-# cloned repo, not your working tree) while staying available locally.
+# This rule stays as a guard. The repo root IS the Cloudflare Pages publish
+# root, so any .md committed here would be served at /<slug>.md and would be a
+# full duplicate of the published article for Google to index as competing
+# content. Verified: /README.md returns 200 with content-type text/markdown.
 /*.md
 !/README.md
