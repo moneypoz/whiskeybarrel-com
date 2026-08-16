@@ -1,0 +1,12 @@
+# Article source Markdown.
+#
+# These live in the repo root for authoring convenience, but the repo root IS
+# the Cloudflare Pages publish root: anything committed here is served. A
+# committed article source would be reachable at /<slug>.md and would be a
+# full duplicate of the published article, which Google can index and treat
+# as competing content.
+#
+# Keeping them untracked means they never reach Cloudflare (Pages deploys the
+# cloned repo, not your working tree) while staying available locally.
+/*.md
+!/README.md
