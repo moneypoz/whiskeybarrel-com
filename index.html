@@ -35,7 +35,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -379,7 +379,7 @@
       font-size: clamp(32px, 4vw, 52px);
       color: var(--hero-text);
       line-height: 1.2;
-      margin-bottom: 72px;
+      margin-bottom: 56px;
     }
 
     .pillars {
@@ -389,21 +389,13 @@
       text-align: left;
     }
 
-    .pillar-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 48px;
-      color: rgba(196, 146, 42, 0.3);
-      line-height: 1;
-      margin-bottom: 20px;
-    }
-
     .pillar-title {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-size: 22px;
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 1.25;
       color: var(--hero-text);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .pillar-text {
@@ -464,19 +456,8 @@
     }
     .link-cta:hover { opacity: 0.7; }
 
-    .featured-deco {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 200px;
-      line-height: 1;
-      color: rgba(196, 146, 42, 0.06);
-      text-align: right;
-      user-select: none;
-    }
-
     @media (max-width: 768px) {
       .featured-inner { grid-template-columns: 1fr; gap: 0; }
-      .featured-deco { display: none; }
     }
 
     /* ════════════════════════════════════════════════════════
@@ -760,17 +741,14 @@
       </div>
       <div class="pillars reveal">
         <div class="pillar">
-          <div class="pillar-num">01</div>
           <div class="pillar-title">Invest Intelligently</div>
           <p class="pillar-text">Whiskey casks are one of the few alternative assets that actively improve with time. We break down how they're valued, bought, and sold. Without broker bias.</p>
         </div>
         <div class="pillar">
-          <div class="pillar-num">02</div>
           <div class="pillar-title">Learn Deeply</div>
           <p class="pillar-text">From the chemistry of barrel aging to the geography of Scotch whisky regions, the knowledge base that makes you a more informed investor and a more interesting drinker.</p>
         </div>
         <div class="pillar">
-          <div class="pillar-num">03</div>
           <div class="pillar-title">Trust the Source</div>
           <p class="pillar-text">No broker relationships. No paid placements. Revenue comes from newsletter sponsorships and affiliate partnerships, always disclosed. You deserve to know who's talking to you.</p>
         </div>
@@ -788,7 +766,6 @@
           <p class="featured-excerpt">From a &pound;2,300 new make Scotch to a &pound;16 million Ardbeg, the 2026 price map across every category. Bourbon barrels, established Scotch, and the super-premium tier above $30,000, with every number sourced.</p>
           <a href="/invest/whisky-cask-prices/" class="link-cta">Read the Full Report →</a>
         </div>
-        <div class="featured-deco" aria-hidden="true">01</div>
       </div>
     </div>
   </section>
